@@ -45,12 +45,20 @@
 }
 </script>
 <style>
+	
  	.el-col{
- 		height: 700px;
+ 		position: fixed;
+		height: 100%;
+		top: 0;
+		left: 0;
+		z-index: 2000;
  		background:#324157;
+ 		width: 20%;
+ 		/*max-width: 200px;*/
+ 		overflow: hidden;
  	}
 	.el-menu{
 		
-		/*min-height:700px;*/
+		
 	}
 </style>

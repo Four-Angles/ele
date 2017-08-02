@@ -1,6 +1,6 @@
 <template>
 	<div id="sidebar"  >
-		<el-col :span="4" >
+		<el-col  >
 	    <el-menu default-active="2" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" theme="dark"  router >
 	      <el-menu-item index="0">首页</el-menu-item>
 	      <el-submenu index="1" >
@@ -45,12 +45,25 @@
 }
 </script>
 <style>
+	
  	.el-col{
- 		height: 700px;
+<<<<<<< HEAD
+ 		width: 200px;
+ 		height: 800px;
+=======
+ 		position: fixed;
+		height: 100%;
+		top: 0;
+		left: 0;
+		z-index: 2000;
+>>>>>>> 0de0143bd27e06c2898527ec637b89ab77c87a34
  		background:#324157;
+ 		width: 20%;
+ 		/*max-width: 200px;*/
+ 		overflow: hidden;
  	}
 	.el-menu{
 		
-		/*min-height:700px;*/
+		
 	}
 </style>

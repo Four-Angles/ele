@@ -1,6 +1,6 @@
 <template>
 	<div id="foodlist">
-		<!-- <h1 style="text-align:center;">食品列表</h1> -->
+		<h1 style="text-align:center;">食品列表</h1>
 		<!--食品列表界面-->
 		<el-table :data="foodlistdata">
     		<el-table-column type="expand">

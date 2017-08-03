@@ -17,12 +17,10 @@ import Addfoods from '@/view/addfoods'
 import Addshops from '@/view/addshops'
 // ycAudrey 2017-8-3
 import Index from '@/view/index' 
-// import Error from '@/view/error'
 Vue.use(Router)
 
 export default new Router({
   routes: [
-    // { path:'/error',component: Error },
     { path: '/',redirect:'/login' },
     {
       path: '/login',name: '',component:Login

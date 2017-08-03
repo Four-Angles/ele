@@ -8,6 +8,7 @@
 	          <el-menu-item index="/manager/users" >用户列表</el-menu-item>
 	          <el-menu-item index="/manager/sellers">商家列表</el-menu-item>
 	          <el-menu-item index="/manager/foodlist">食品列表</el-menu-item>
+	           <el-menu-item index="/manager/orders">订单列表</el-menu-item>
 	          <el-menu-item index="/manager/managers">管理员列表</el-menu-item>
 	       
 	      </el-submenu>

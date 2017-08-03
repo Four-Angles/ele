@@ -248,7 +248,7 @@
 	      	imageUrl2: '',
 	      	imageUrl3: '',
 	      	input: '', //优惠详情内容
-	      	options:[{  //店铺类型选项列表选项
+	      	options:[{  //店铺类型选项的选项
 	      	          value: 'xiaochi',
 	      	          label: '小吃宵夜',
 	      	          children: [

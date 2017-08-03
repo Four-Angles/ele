@@ -130,7 +130,7 @@
 	      	},
 	      	imageUrl: '',
 	      	indexOfselect:0,
-
+	      	
 	        dialogTableVisible_edit:false,
 	        dialogTableVisible_addSpec:false,
 

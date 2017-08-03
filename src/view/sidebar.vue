@@ -1,8 +1,13 @@
 <template>
 	<div id="sidebar"  >
 		<el-col  >
+<<<<<<< HEAD
 	    <el-menu  class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" theme="dark"  router  :default-active="$route.path">
 	      <el-menu-item index="/manager/index">首页</el-menu-item>
+=======
+	    <el-menu default-active="2" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" theme="dark"  router >
+	      <el-menu-item index="0">首页</el-menu-item>
+>>>>>>> b964a19083d6a22fab5a20b6f4169660dfc72c2e
 	      <el-submenu index="1" >
 	        <template slot="title">数据管理</template>
 	          <el-menu-item index="/manager/users" >用户列表</el-menu-item>
@@ -46,11 +51,12 @@
 </script>
 <style>	
  	.el-col{
+ 		
  		position: fixed;
 		height: 100%;
 		top: 0;
 		left: 0;
-		z-index: 2000;
+		/*z-index: 2000;*/
  		background:#324157;
  		width: 20%;
  		/*max-width: 200px;*/

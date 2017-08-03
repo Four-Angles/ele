@@ -44,19 +44,14 @@
   }
 }
 </script>
-<style>
-	
+<style>	
  	.el-col{
-<<<<<<< HEAD
- 		width: 200px;
- 		height: 800px;
-=======
+ 		
  		position: fixed;
 		height: 100%;
 		top: 0;
 		left: 0;
-		z-index: 2000;
->>>>>>> 0de0143bd27e06c2898527ec637b89ab77c87a34
+		/*z-index: 2000;*/
  		background:#324157;
  		width: 20%;
  		/*max-width: 200px;*/

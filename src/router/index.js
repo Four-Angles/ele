@@ -15,10 +15,14 @@ import Users from '@/view/users'
 import Managers from '@/view/managers'
 import Addfoods from '@/view/addfoods'
 import Addshops from '@/view/addshops'
+// ycAudrey 2017-8-3
+import Index from '@/view/index' 
+// import Error from '@/view/error'
 Vue.use(Router)
 
 export default new Router({
   routes: [
+    // { path:'/error',component: Error },
     { path: '/',redirect:'/login' },
     {
       path: '/login',name: '',component:Login
@@ -32,8 +36,10 @@ export default new Router({
           { path: 'foodlist',component:Foodlist},
           { path: 'orders',component:Orders},
           { path: 'addshops',component:Addshops},
-          { path: 'addfoods',component:Addfoods}
-
+          { path: 'addfoods',component:Addfoods},
+          // ycAudrey 2017-8-3 
+          { path: 'index',component:Index}   
+          
       ]
     },
 

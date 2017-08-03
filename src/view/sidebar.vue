@@ -1,7 +1,7 @@
 <template>
 	<div id="sidebar"  >
 		<el-col  >
-	    <el-menu default-active="2" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" theme="dark"  router >
+	    <el-menu  class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" theme="dark"  router  :default-active="$route.path">
 	      <el-menu-item index="0">首页</el-menu-item>
 	      <el-submenu index="1" >
 	        <template slot="title">数据管理</template>
@@ -11,7 +11,6 @@
 	          <el-menu-item index="/manager/managers">管理员列表</el-menu-item>
 	       
 	      </el-submenu>
-
 	      <el-submenu index="2">
 	        <template slot="title">添加数据</template>
 	          <el-menu-item index="/manager/addshops" >添加商铺</el-menu-item>
@@ -47,16 +46,13 @@
 <style>
 	
  	.el-col{
-<<<<<<< HEAD
- 		width: 200px;
- 		height: 800px;
-=======
+ 		/*width: 200px;
+ 		height: 800px;*/
  		position: fixed;
 		height: 100%;
 		top: 0;
 		left: 0;
 		z-index: 2000;
->>>>>>> 0de0143bd27e06c2898527ec637b89ab77c87a34
  		background:#324157;
  		width: 20%;
  		/*max-width: 200px;*/

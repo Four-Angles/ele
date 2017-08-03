@@ -28,7 +28,8 @@ export default {
 
 <style>
 body{
-  margin: 0;padding: 0;
+  margin: 0;
+  padding: 0;
 }
 a{
   text-decoration: none;

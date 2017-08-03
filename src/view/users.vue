@@ -25,6 +25,7 @@
 		name:'users',
 		data() {
 	 	       return {
+
 	           	usersdata:[]
 	         };
 	      },
@@ -43,13 +44,14 @@
 				    // error callback
 				    alert("加载user-managers.json文件失败");
 				});
-		    },
-			
+		    },				           
+		
 		}
 		
 	}
 </script>
 <style>
+
  #users{
  	margin: 5px;
  	width: 79%;
@@ -67,4 +69,8 @@
  .el-pagination{
 	margin-left: 80px;
  }
+
+   
+
+
 </style>

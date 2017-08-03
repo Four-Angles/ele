@@ -69,7 +69,7 @@
 	        "takeAddress": "上海市杨浦区军工路1436号12号楼",
 	        "shopAddress": "上海市奉贤区秀南路108",
 	        "price":"130",
-	        "state":"支付成功"
+	        "state":"支付失败"
        },
        {	
 			"orderId":"8",
@@ -99,7 +99,7 @@
 	        "takeAddress": "上海市杨浦区军工路1436号12号楼",
 	        "shopAddress": "上海市奉贤区秀南路108",
 	        "price":"130",
-	        "state":"支付成功"
+	        "state":"支付失败"
        },
        {	
 			"orderId":"11",
@@ -129,7 +129,7 @@
 	        "takeAddress": "上海市杨浦区军工路1436号12号楼",
 	        "shopAddress": "上海市奉贤区秀南路108",
 	        "price":"130",
-	        "state":"支付成功"
+	        "state":"支付失败"
        },
        {	
 			"orderId":"14",
@@ -189,7 +189,7 @@
 	        "takeAddress": "上海市杨浦区军工路1436号12号楼",
 	        "shopAddress": "上海市奉贤区秀南路108",
 	        "price":"130",
-	        "state":"支付成功"
+	        "state":"支付失败"
        },
        {	
 			"orderId":"23",
@@ -209,7 +209,7 @@
 	        "takeAddress": "上海市杨浦区军工路1436号12号楼",
 	        "shopAddress": "也许在这里",
 	        "price":"130",
-	        "state":"支付成功"
+	        "state":"支付失败"
        },
        {	
 			"orderId":"25",

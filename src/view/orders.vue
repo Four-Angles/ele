@@ -36,8 +36,8 @@
 		    <el-table-column
 		      label="订单状态"
 		      prop="state">
-		      <template scope="scope">
-		         <el-tag :type=success>{{scope.row.state}}</el-tag>
+		      <template scope="scope">		         
+		         <el-tag :type="scope.row.state=='支付成功'?'success':'danger'">{{scope.row.state}}</el-tag>
 		      </template>
 		    </el-table-column>
 		  </el-table>

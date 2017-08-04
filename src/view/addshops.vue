@@ -149,6 +149,7 @@
 		width: 79%;	
 		overflow: hidden;
 		float: right;
+
 	}
 	.el-form{
 		padding-top: 10px;
@@ -180,6 +181,7 @@
 	    border-radius: 6px;
 	    cursor: pointer;
 	    overflow: hidden;
+	   
 	  }
 	  .avatar-uploader .el-upload:hover {
 	    border-color: #20a0ff;

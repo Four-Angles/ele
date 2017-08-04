@@ -42,7 +42,7 @@
 }
 </script>
 <style>	
- 	.el-col{
+ #sidebar .el-col{
  		
  		position: fixed;
 		height: 100%;
@@ -54,8 +54,5 @@
  		/*max-width: 200px;*/
  		overflow: hidden;
  	}
-	.el-menu{
-		
-		
-	}
+
 </style>

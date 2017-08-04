@@ -2,17 +2,19 @@
 	<div id="manager">
 		
 		<my_sidebar></my_sidebar>
-
+		
 		<router-view></router-view>
+		<my_nav></my_nav>
+		
  	</div>
  </template>
 <script>
 	import sidebar from './sidebar'
-
+	import breadNav from './breadNav'
 	export default {
 	  name: 'manager',
 	  //注册组件
-	  components:{ my_sidebar:sidebar}, //从外部通过import导入sidebar组件，注册为my_sidebar
+	  components:{ my_sidebar:sidebar,my_nav:breadNav}, //从外部通过import导入sidebar组件，注册为my_sidebar
 	  data() {
 	        return {
 	         

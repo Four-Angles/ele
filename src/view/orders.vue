@@ -100,6 +100,7 @@
 <style>
  #ord{
  	margin: 5px;
+ 	margin-top: 50px;
 	width: 79%;
 	float: right;
 } 

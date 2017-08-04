@@ -54,7 +54,7 @@
     },
     "is_new": true,
     "is_premium": true,
-    "image_path": "aaa.jpeg",
+    "image_path": "http://images.cangdu.org/aaa.jpeg",
     "identification": {
       "registered_number": "",
       "registered_address": "",
@@ -169,7 +169,7 @@
     },
     "is_new": true,
     "is_premium": true,
-    "image_path": "15cee7825042013.jpg",
+    "image_path": "http://images.cangdu.org/15cee7825042013.jpg",
     "identification": {
       "registered_number": "",
       "registered_address": "",
@@ -240,7 +240,7 @@
       31.40665
     ],
     "phone": "1145555",
-    "category": "果蔬生鲜",
+    "category": "鲜花蛋糕/鲜花",
     "supports": [
       {
         "description": "已加入“外卖保”计划，食品安全有保障",
@@ -284,7 +284,7 @@
     },
     "is_new": true,
     "is_premium": true,
-    "image_path": "15d4f4314502926.jpg",
+    "image_path": "http://images.cangdu.org/15d4f4314502926.jpg",
     "identification": {
       "registered_number": "",
       "registered_address": "",
@@ -399,7 +399,7 @@
     },
     "is_new": true,
     "is_premium": true,
-    "image_path": "15d104c884b2314.jpg",
+    "image_path": "http://images.cangdu.org/15d104c884b2314.jpg",
     "identification": {
       "registered_number": "",
       "registered_address": "",
@@ -465,7 +465,7 @@
     },
     "is_new": false,
     "is_premium": false,
-    "image_path": "15d3c803fb62819.jpg",
+    "image_path": "http://images.cangdu.org/15d3c803fb62819.jpg",
     "identification": {
       "registered_number": "",
       "registered_address": "",
@@ -514,7 +514,7 @@
       30.26934
     ],
     "phone": "8uuuuuugg",
-    "category": "异国料理",
+    "category": "异国料理/东南亚菜",
     "supports": [],
     "status": 0,
     "recent_order_num": 81,
@@ -533,7 +533,7 @@
     },
     "is_new": true,
     "is_premium": false,
-    "image_path": "15c58db523471.jpg",
+    "image_path": "http://images.cangdu.org/15c58db523471.jpg",
     "identification": {
       "registered_number": "",
       "registered_address": "",
@@ -624,7 +624,7 @@
     },
     "is_new": true,
     "is_premium": true,
-    "image_path": "15d40e06c302871.png",
+    "image_path": "http://images.cangdu.org/15d40e06c302871.png",
     "identification": {
       "registered_number": "",
       "registered_address": "",
@@ -695,7 +695,7 @@
       23.02802
     ],
     "phone": "12345678911",
-    "category": "商店超市/零食饮料",
+    "category": "商店超市/便利店",
     "supports": [
       {
         "description": "已加入“外卖保”计划，食品安全有保障",
@@ -739,7 +739,7 @@
     },
     "is_new": true,
     "is_premium": true,
-    "image_path": "15d54ac64943019.jpg",
+    "image_path": "http://images.cangdu.org/15d54ac64943019.jpg",
     "identification": {
       "registered_number": "",
       "registered_address": "",
@@ -830,7 +830,7 @@
     },
     "is_new": true,
     "is_premium": true,
-    "image_path": "15cce5087fe1731.PNG",
+    "image_path": "http://images.cangdu.org/15cce5087fe1731.PNG",
     "identification": {
       "registered_number": "",
       "registered_address": "",
@@ -921,7 +921,7 @@
     },
     "is_new": true,
     "is_premium": true,
-    "image_path": "15d9cd71e173789.jpg",
+    "image_path": "http://images.cangdu.org/15d9cd71e173789.jpg",
     "identification": {
       "registered_number": "",
       "registered_address": "",
@@ -1012,7 +1012,7 @@
     },
     "is_new": true,
     "is_premium": false,
-    "image_path": "15d2c1713032620.png",
+    "image_path": "http://images.cangdu.org/15d2c1713032620.png",
     "identification": {
       "registered_number": "",
       "registered_address": "",
@@ -1103,7 +1103,7 @@
     },
     "is_new": true,
     "is_premium": true,
-    "image_path": "15cfe53f4352204.jpg",
+    "image_path": "http://images.cangdu.org/15cfe53f4352204.jpg",
     "identification": {
       "registered_number": "",
       "registered_address": "",
@@ -1194,7 +1194,7 @@
     },
     "is_new": true,
     "is_premium": true,
-    "image_path": "15d0b84fe4d2265.jpg",
+    "image_path": "http://images.cangdu.org/15d0b84fe4d2265.jpg",
     "identification": {
       "registered_number": "",
       "registered_address": "",
@@ -1249,7 +1249,7 @@
       30.6855
     ],
     "phone": "1233",
-    "category": "快餐便当/简餐",
+    "category": "快餐便当/盖浇饭",
     "supports": [
       {
         "description": "已加入“外卖保”计划，食品安全有保障",
@@ -1293,7 +1293,7 @@
     },
     "is_new": true,
     "is_premium": true,
-    "image_path": "15d10daaeab2350.jpg",
+    "image_path": "http://images.cangdu.org/15d10daaeab2350.jpg",
     "identification": {
       "registered_number": "",
       "registered_address": "",
@@ -1340,7 +1340,7 @@
       31.18064
     ],
     "phone": "18521363614",
-    "category": "快餐便当/简餐",
+    "category": "快餐便当/包子粥店",
     "supports": [
       {
         "description": "已加入“外卖保”计划，食品安全有保障",
@@ -1384,7 +1384,7 @@
     },
     "is_new": true,
     "is_premium": true,
-    "image_path": "15d2ba210b12611.jpg",
+    "image_path": "http://images.cangdu.org/15d2ba210b12611.jpg",
     "identification": {
       "registered_number": "",
       "registered_address": "",
@@ -1475,7 +1475,7 @@
     },
     "is_new": true,
     "is_premium": true,
-    "image_path": "15d2cc655492625.JPG",
+    "image_path": "http://images.cangdu.org/15d2cc655492625.JPG",
     "identification": {
       "registered_number": "",
       "registered_address": "",
@@ -1530,7 +1530,7 @@
       22.5415
     ],
     "phone": "123423423411",
-    "category": "快餐便当/简餐",
+    "category": "快餐便当/米粉面馆",
     "supports": [
       {
         "description": "已加入“外卖保”计划，食品安全有保障",
@@ -1574,7 +1574,7 @@
     },
     "is_new": true,
     "is_premium": true,
-    "image_path": "15d30296b872658.png",
+    "image_path": "http://images.cangdu.org/15d30296b872658.png",
     "identification": {
       "registered_number": "",
       "registered_address": "",
@@ -1637,7 +1637,7 @@
       29.88759
     ],
     "phone": "15738774536",
-    "category": "快餐便当/简餐",
+    "category": "快餐便当/米粉面馆",
     "supports": [
       {
         "description": "已加入“外卖保”计划，食品安全有保障",
@@ -1681,7 +1681,7 @@
     },
     "is_new": true,
     "is_premium": false,
-    "image_path": "15d30a4acbb2676.png",
+    "image_path": "http://images.cangdu.org/15d30a4acbb2676.png",
     "identification": {
       "registered_number": "",
       "registered_address": "",
@@ -1766,7 +1766,7 @@
     },
     "is_new": true,
     "is_premium": true,
-    "image_path": "15d3172f4062700.png",
+    "image_path": "http://images.cangdu.org/15d3172f4062700.png",
     "identification": {
       "registered_number": "",
       "registered_address": "",
@@ -1857,7 +1857,7 @@
     },
     "is_new": true,
     "is_premium": true,
-    "image_path": "15d3b4ca8db2800.png",
+    "image_path": "http://images.cangdu.org/15d3b4ca8db2800.png",
     "identification": {
       "registered_number": "",
       "registered_address": "",

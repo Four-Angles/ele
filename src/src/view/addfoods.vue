@@ -1,11 +1,11 @@
 <template>
-	<div id="foodlist">
-		<h1>食品列表</h1>
+	<div id="addfoods">
+		<h1>添加商品</h1>
 	</div>
 </template>
 <script>
 	export default{
-		name:'foodlist',
+		name:'addfoods',
 		data() {
 	 	       return {
 	           	

@@ -44,7 +44,7 @@
     <el-table-column label="操作" prop="desc">
 		<template scope="scope">
 	        <el-button size="mini" @click="handleEdit(scope.$index)">编辑</el-button>
-	        <router-link to="addfoods"><el-button size="mini" @click="handleAdd(scope.$index)">添加食品</el-button></router-link>
+	        <el-button size="mini" @click="handleAdd(scope.$index)">添加食品</el-button>
 	        <el-button size="mini" type="danger" @click="handleDelete(scope.$index)">删除</el-button>
       </template>
 	</el-table-column>
@@ -93,39 +93,39 @@
 		width: 79%;
 		float: right;
 	}
-	h1{
+	#sellers h1{
 		text-align: center;
 		margin-bottom: 15px;
 	}
-	.el-form-item__label{
+	#sellers .el-form-item__label{
 		width: 100px;
 	}
-	.el-form-item__content{
+	#sellers .el-form-item__content{
 		margin-left: 100px;
 	}
-  .demo-table-expand {
+  #sellers .demo-table-expand {
     font-size: 0;
   }
-  .demo-table-expand label {
+  #sellers .demo-table-expand label {
     width: 90px;
     color: #99a9bf;
   }
-  .demo-table-expand .el-form-item {
+  #sellers .demo-table-expand .el-form-item {
     margin-right: 0;
     margin-bottom: 0;
     width: 50%;
   }
-  .avatar-uploader .el-upload {
+  #sellers .avatar-uploader .el-upload {
       border: 1px dashed #d9d9d9;
       border-radius: 6px;
       cursor: pointer;
       position: relative;
       overflow: hidden;
     }
-    .avatar-uploader .el-upload:hover {
+   #sellers  .avatar-uploader .el-upload:hover {
       border-color: #20a0ff;
     }
-    .avatar-uploader-icon {
+   #sellers  .avatar-uploader-icon {
       font-size: 28px;
       color: #8c939d;
       width: 178px;
@@ -133,7 +133,7 @@
       line-height: 178px;
       text-align: center;
     }
-    .avatar {
+   #sellers  .avatar {
       width: 120px;
       height: 120px;
       display: block;
@@ -239,12 +239,12 @@
 				this.dialogFormVisible = true;
 				
 			},
-			// handleAdd:function(index){
-			// 	this.$router.push({path:'addfoods'});
-			// },
+			handleAdd:function(index){
+				this.$router.push({path:'addfoods'});
+			},
 			handleDelete:function(index){
 				 this.list.splice(index,1);
-
+				 this.$message('删除'+this.list[index].name+"成功！");
 			},
 			handleAvatarSuccess:function(res, file) {
 			        this.list[this.indexOfSelected]['image_path'] = URL.createObjectURL(file.raw);

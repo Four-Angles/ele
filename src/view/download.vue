@@ -1,5 +1,5 @@
 <template>
-	<div id="download">
+	<div id="download" @keyup.enter="submitForm('ruleForm2')">
 		<h1>elm后台管理系统</h1>
 		<div class="DivForm">
 		<el-form :model="ruleForm2" :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">

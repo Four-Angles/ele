@@ -16,8 +16,11 @@
 				    </el-select>
 				  </el-form-item>				  		
 		</el-form>
-		<div class="hide-kind">
-			<el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" >
+		</div>  <!-- select-food2 -->
+		<div class="select-food3">
+		 <el-collapse v-model="activeNames" @change="handleChange">
+  			<el-collapse-item name="1" class="hide">
+  			<el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" >
 				<el-form-item  label="食品种类">
 			   		 <el-input v-model="ruleForm.kind"></el-input>
 			     </el-form-item>
@@ -26,13 +29,11 @@
 			     </el-form-item>
 			     <el-button type="primary" class="sumit">提交</el-button>
 			</el-form>
-		</div>  <!--  hide-kind -->
-		<div class="addfoodstyle">
-		<i class="el-icon-caret-top edit_icon"></i>
-		<span>添加食品种类</span>
-		</div>
+  			 </el-collapse-item>
+  			    <el-collapse-item  name="1" class="hide2" title="添加食品种类"></el-collapse-item>		  							  
+			</el-collapse>
 
-		</div>  <!-- select-food2 -->
+		</div>  <!-- select-food3 -->
 		
 		<div id="add-food1">
 		添加食品
@@ -159,20 +160,24 @@
 	         };
 	      },
 		methods:{
-				  handleRemove(file, fileList) {
-        			console.log(file, fileList);
-      			},
-			      handlePictureCardPreview(file) {
-			        this.dialogImageUrl = file.url;
-			        this.dialogVisible = true;
-            },
 
-           		handleChange(value) {
-       			console.log(value);
+			handleRemove(file, fileList) {
+
+        		console.log(file, fileList);
       		},
-      		 deleteRow(index, rows) {
-        	 rows.splice(index, 1);
-       },
+		 
+	      	handlePictureCardPreview(file) {
+	        	this.dialogImageUrl = file.url;
+	        	this.dialogVisible = true;
+        	},
+
+       		handleChange(value) {
+   				console.log(value);
+      		},
+
+	      	deleteRow(index, rows) {
+	        	 rows.splice(index, 1);
+	       	},
       		show:function(){
       				this.$message({
       					showClose: true,
@@ -181,15 +186,16 @@
       					  });
       				return false;
     			     					
-		 },
-		 show1:function(){
+			},
+			show1:function(){
 		 		 this.$notify.error({
           		 title: '错误',
           		 message: '请检查输入是否正确'
-        });
-		 	}
+        		});
+			 }
 		 				 
-      		}
+      	}
+
 		
 	}
 </script>
@@ -198,51 +204,41 @@
 		margin: 5px;
 		width: 79%;
 		float: right;
+		text-align: center;
 	}
 	#select-food1{
 		margin: 20px auto 0 auto;
 		height: 21px;
 		width: 464px;
-		text-align: center;
 		margin-bottom: 10px;
 		font-size: 16px;
 
 	}
 #select-food2{
-	height: 306.5px;
+	height: 80px;
 	width: 60%;
-	border-radius: 6px;
+	border-top-left-radius: 6px;
+	border-top-right-radius-radius: 6px;
 	border: 1px solid #eaeefb;
+	margin: auto;
+	border-bottom: none;
+}
+.select-food3{
+	width: 60.2%;
 	margin: auto;
 }
 .el-select1{
 	width: 100%;
 }
-.hide-kind{
-	width: 100%;
-	height: 185px;
-	border: 1px solid #eaeefb;
-	background: #f9fafc;
-}
-.sumit{margin-left: -380px;}
-.addfoodstyle{
-	width: 100%;
-	height: 49.5px;
-}
-.addfoodstyle:hover{
-color: #20a0ff;
-background: #f9fafc;
-}
-.addfoodstyle i,.addfoodstyle span{
-	line-height: 50px;
-	font-size: 14px;
-	color: #999;
-}
+.sumit{float: left;margin-left: 100px;}
+.hide .el-collapse-item__header{display: none;}
+.hide2 .el-collapse-item__content{display: none;}
+.hide2 .el-collapse-item__header:hover{background: #f9fafc;}
+
 #add-food1{
 		margin: 20px auto 0 auto;
 		height: 21px;
-		width: 464px;
-		text-align: center;
+		width: 464px;		
 		margin-bottom: 10px;
 		font-size: 16px;
 
@@ -254,21 +250,21 @@ background: #f9fafc;
 		border: 1px solid #eaeefb;
 		margin: auto;
 	}
-	.el-form{
+#addfoods .el-form{
 		margin-left: 14px;
 		margin-top: 12px;
-		width: 96%;
+		width: 96% !important;
 
 	}
 	.el-upload{		
-		margin-left: -400px;
+	float: left;
 	}
 
 	.el-select2,.el-input-number{
-		margin-left: -350px;
+		float: left;
 	}
 	.el-radio{
-		margin-left: -390px;
+		float: left;
 	}
 	#more-standards{
 		height: 147px;
@@ -281,7 +277,7 @@ background: #f9fafc;
 		margin-left:-300px;
 		margin-top: 20px;
 	}
-	.confirm{margin-left: -315px;}
+	.confirm{margin-left: 100px;float: left;}
 	.upload-picture{
 		color: #8c939d;
 		height: 40px;

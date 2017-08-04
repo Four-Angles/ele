@@ -5,7 +5,7 @@ import Router from 'vue-router'
 /*import Menu from '@/view/menu'*/
 import download from '@/view/download'
 import manager from '@/view/manager'
-import person from '@/view/person'
+import Person from '@/view/personalInfo'
 import resign from '@/view/resign'
 import Orders from '@/view/orders'
 import Sellers from '@/view/Sellers'
@@ -36,7 +36,10 @@ export default new Router({
           { path: 'addshops',component:Addshops},
           { path: 'addfoods',component:Addfoods},
           // ycAudrey 2017-8-3 
-          { path: 'index',component:Index}   
+          { path: 'index',component:Index},
+
+          //添加个人信息菜单 
+          { path: 'personalInfo', component:Person }   
           
       ]
     },

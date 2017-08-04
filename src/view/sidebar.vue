@@ -2,24 +2,21 @@
 	<div id="sidebar"  >
 		<el-col  >
 	    <el-menu  class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" theme="dark"  router  :default-active="$route.path">
-	      <el-menu-item index="/manager/index">首页</el-menu-item>
+	      <el-menu-item index="/manager/index"><i class="el-icon-menu"></i>首页</el-menu-item>
 	      <el-submenu index="1" >
-	        <template slot="title">数据管理</template>
+	        <template slot="title"><i class="el-icon-document"></i>数据管理</template>
 	          <el-menu-item index="/manager/users" >用户列表</el-menu-item>
 	          <el-menu-item index="/manager/sellers">商家列表</el-menu-item>
 	          <el-menu-item index="/manager/foodlist">食品列表</el-menu-item>
 	           <el-menu-item index="/manager/orders">订单列表</el-menu-item>
 	          <el-menu-item index="/manager/managers">管理员列表</el-menu-item>
-	       
 	      </el-submenu>
 	      <el-submenu index="2">
-	        <template slot="title">添加数据</template>
+	        <template slot="title"><i class="el-icon-plus"></i>添加数据</template>
 	          <el-menu-item index="/manager/addshops" >添加商铺</el-menu-item>
-	          <el-menu-item index="/manager/addfoods">添加商品</el-menu-item>
-
-	       
+	          <el-menu-item index="/manager/addfoods">添加商品</el-menu-item>    
 	      </el-submenu>
-	      <el-menu-item index="3">导航三</el-menu-item>
+	      <el-menu-item index="/manager/personalInfo"><i class="el-icon-information"></i>个人信息</el-menu-item>
 	    </el-menu>
 	  </el-col>
   </div>
@@ -45,7 +42,7 @@
 }
 </script>
 <style>	
- 	.el-col{
+ #sidebar .el-col{
  		
  		position: fixed;
 		height: 100%;
@@ -57,8 +54,5 @@
  		/*max-width: 200px;*/
  		overflow: hidden;
  	}
-	.el-menu{
-		
-		
-	}
+
 </style>

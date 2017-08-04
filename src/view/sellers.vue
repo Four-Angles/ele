@@ -1,7 +1,7 @@
 <template>
 	<div id="sellers">
 		<h1>商家列表</h1>		
-  <el-table
+  <el-table v-loading.body="loading"
     :data="list"
     style="width: 100%;">
     <el-table-column type="expand">
@@ -49,6 +49,15 @@
       </template>
 	</el-table-column>
   	</el-table>
+    <!-- 分页功能-->
+    <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page.sync="currentPage1"
+      :page-size="limit"
+      layout="total, prev, pager, next"
+      :total="total">
+    </el-pagination>
 
 	<el-dialog title="修改店铺信息" :visible.sync="dialogFormVisible">
 	  <el-form :model="list[indexOfSelected]">
@@ -73,7 +82,7 @@
 	         action="https://jsonplaceholder.typicode.com/posts/"
 	         :show-file-list="false"
 	         :on-success="handleAvatarSuccess">
-	         <img v-if="list[indexOfSelected]['image_path']" :src="list[indexOfSelected]['image_path']" class="avatar">
+	         <img v-if="list[indexOfSelected]['image_path']" :src="'http://images.cangdu.org/'+list[indexOfSelected]['image_path']" class="avatar">
 	         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
 	       </el-upload>
 	    </el-form-item>
@@ -96,47 +105,46 @@
 		text-align: center;
 		margin-bottom: 15px;
 	}
-
 	#sellers .el-form-item__label{
 		width: 100px;
 	}
 	#sellers .el-form-item__content{
 		margin-left: 100px;
 	}
-    #sellers .demo-table-expand {
-        font-size: 0;
+  #sellers .demo-table-expand {
+    font-size: 0;
+  }
+  #sellers .demo-table-expand label {
+    width: 90px;
+    color: #99a9bf;
+  }
+  #sellers .demo-table-expand .el-form-item {
+    margin-right: 0;
+    margin-bottom: 0;
+    width: 50%;
+  }
+  #sellers .avatar-uploader .el-upload {
+      border: 1px dashed #d9d9d9;
+      border-radius: 6px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
     }
-    #sellers .demo-table-expand label {
-	    width: 90px;
-	    color: #99a9bf;
+   #sellers  .avatar-uploader .el-upload:hover {
+      border-color: #20a0ff;
     }
-	#sellers .demo-table-expand .el-form-item {
-	    margin-right: 0;
-	    margin-bottom: 0;
-	    width: 50%;
-	}
-    #sellers .avatar-uploader .el-upload {
-	    border: 1px dashed #d9d9d9;
-	    border-radius: 6px;
-	    cursor: pointer;
-	    position: relative;
-	    overflow: hidden;
+   #sellers  .avatar-uploader-icon {
+      font-size: 28px;
+      color: #8c939d;
+      width: 178px;
+      height: 178px;
+      line-height: 178px;
+      text-align: center;
     }
-    #sellers  .avatar-uploader .el-upload:hover {
-       border-color: #20a0ff;
-    }
-    #sellers  .avatar-uploader-icon {
-        font-size: 28px;
-        color: #8c939d;
-        width: 178px;
-        height: 178px;
-        line-height: 178px;
-        text-align: center;
-    }
-    #sellers  .avatar {
-        width: 120px;
-        height: 120px;
-        display: block;
+   #sellers  .avatar {
+      width: 120px;
+      height: 120px;
+      display: block;
     }
 </style>
 
@@ -145,9 +153,16 @@
 		name:'sellers',
 		data() {
 	 	       return {
+	 	       	total:0,
+	 	       	currentPage1: 1,
 	 	       	list:[],
+	 	       	loading:false,
 	 	       	indexOfSelected:0,
 	 	       	myCategory:[],
+	 	       	longitude:139.6917064,//默认经度
+	 	       	latitude:23.12908,//默认维度
+	 	       	offset:0 ,//默认跳过多少条数据
+	 	       	limit:20, //请求数据的数量，默认20
 	 	       	dialogFormVisible:false,
 	 	       	options:[
 	 	       		{
@@ -227,11 +242,34 @@
 	         };
 	      },
 		methods:{
-			getData:function(){
-				this.$http.get('../../static/data/sellers.json').then(function(res){
-					this.list = res.body;
+			//获取所有商铺的数量
+			getTotal:function(){
+				this.$http.get('http://cangdu.org:8001/shopping/restaurants/count').then(function(res){
+					this.total = res.body.count;
 				},function(res){
 				});
+			},
+			//获取所有商铺列表
+			getData:function(){
+				this.$http.get('http://cangdu.org:8001/shopping/restaurants',{params:{latitude:this.latitude,longitude:this.longitude,offset:this.offset,limit:this.limit}}).then(function(res){
+					this.list = res.body;
+					this.loading = false;
+				},function(res){
+				});
+			},
+			//成功获取位置后执行的方法
+			setPosition:function(position){
+				this.longitude = position.coords.longitude;
+				this.latitude = position.coords.latitude;
+				console.log(this.longitude,this.latitude);
+				this.getData();
+			},
+			//获得用户当前地理位置
+			getPosition:function(){
+				this.loading = true;
+				if (navigator.geolocation) {
+					navigator.geolocation.getCurrentPosition(this.setPosition,this.getData);
+				}
 			},
 			handleEdit:function(index){
 				this.indexOfSelected = index;
@@ -243,8 +281,9 @@
 				this.$router.push({path:'addfoods'});
 			},
 			handleDelete:function(index){
-				 this.list.splice(index,1);
-				 this.$message('删除'+this.list[index].name+"成功！");
+				this.$message('删除 "'+this.list[index].name+'" 成功!');
+				console.log('删除 id='+this.list[index].id+" 成功！");
+				this.list.splice(index,1);
 			},
 			handleAvatarSuccess:function(res, file) {
 			        this.list[this.indexOfSelected]['image_path'] = URL.createObjectURL(file.raw);
@@ -280,11 +319,23 @@
 				this.categoryToListCategory(this.indexOfSelected);
 				this.dialogFormVisible = false;
 				// this.category = [];
-			}
+			},
+			//分页功能
+			handleSizeChange(val) {
+		        console.log(`每页 ${val} 条`);
+		    },
+		    //分页功能--当前页变动时触发
+		    handleCurrentChange(val) {
+		        console.log(`当前页: ${val}`);
+		        this.offset = (val-1)*20;
+		        this.getData();
+		    }
 
 		},
 		mounted:function(){
-	    	this.getData();
+			this.getTotal();
+			this.getPosition();
+	    	// this.getData();
 
 	    }
 		

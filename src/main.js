@@ -7,6 +7,11 @@ import App from './App'
 import router from './router'
 import VueResource from 'vue-resource'
 
+//ycAudrey 2017-8-4  ---start
+import VCharts from 'v-charts'
+Vue.use(VCharts)
+//ycAudrey 2017-8-4  ---end
+
 Vue.use(ElementUI)
 Vue.use(VueResource)
 
@@ -17,5 +22,8 @@ new Vue({
   el: '#app',
   router,
   template: '<App/>',
-  components: { App }
+  components: { App },
+  //ycAudrey 2017-8-4  ---start
+  render: h => h(App)
+  //ycAudrey 2017-8-4  ---end
 })

@@ -3,13 +3,12 @@ import Router from 'vue-router'
 /*import Hello from '@/components/Hello'*/
 
 /*import Menu from '@/view/menu'*/
-import download from '@/view/download'
 import manager from '@/view/manager'
 import Person from '@/view/personalInfo'
 import resign from '@/view/resign'
 import Orders from '@/view/orders'
 import Sellers from '@/view/Sellers'
-import Login from '@/view/download'
+import Login from '@/view/login'
 import Foodlist from '@/view/foodlist'
 import Users from '@/view/users'
 import Managers from '@/view/managers'
@@ -26,18 +25,25 @@ export default new Router({
       path: '/login',name: '',component:Login
     },
     {
-      path: '/manager',name: 'manager',component:manager,
+      path: '/manager/index',name: '饿了么后台管理系统',component:manager,
       children:[
-          { path: 'users',component:Users},
-          { path: 'managers',component:Managers},
-          { path: 'sellers',component:Sellers,meta:{keep_alive: true}},
-          { path: 'foodlist',component:Foodlist},
-          { path: 'orders',component:Orders},
-          { path: 'addshops',component:Addshops},
-          { path: 'addfoods',component:Addfoods},
-          // ycAudrey 2017-8-3 
-          { path: 'index',component:Index,meta:{keep_alive: true}},
+          { path: '',name:'首页',component:Index},
+          { path: '',name: '数据管理',component:manager,
+            children:[
+            { path: 'users',name: '用户列表',component:Users},
+            { path: 'managers',name: '管理员列表',component:Managers},
+            { path: 'sellers',name:'商家列表',component:Sellers},
+            { path: 'foodlist',name:'食品列表',component:Foodlist},
+            { path: 'orders',name:'订单列表',component:Orders},]
+          },
+          { path: '',name: '添加数据',component:manager,
+            children:[
+            { path: 'addshops',name:'增加商铺',component:Addshops},
+            { path: 'addfoods',name:'增加商品',component:Addfoods},]
+          },
 
+          
+          // ycAudrey 2017-8-3 
           //添加个人信息菜单 
           { path: 'personalInfo', component:Person }   
           

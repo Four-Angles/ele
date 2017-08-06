@@ -144,18 +144,20 @@
 	h1{
 		text-align:center; 
 	}
-	.el-form{
-		padding-top: 10px;
-		width: 56%;
-		margin: 0 auto;
-	}
-
 	#addshops{
-		margin: 5px;
-		width: 79%;
+	 	margin: 5px;
+		width: 79%;	
 		overflow: hidden;
 		float: right;
+
 	}
+	.el-form{
+		padding-top: 10px;
+		width: 56%!important;
+		margin: 0 auto!important;
+	}
+
+	
 	
 	/*店铺详细地址输入框大小*/
 	.address .el-autocomplete{
@@ -178,11 +180,14 @@
 	    border: 1px dashed #d9d9d9;
 	    border-radius: 6px;
 	    cursor: pointer;
-	    position: relative;
 	    overflow: hidden;
+	   
 	  }
 	  .avatar-uploader .el-upload:hover {
 	    border-color: #20a0ff;
+	  }
+	  .el-input-number,.el-upload{
+	  	margin-left: 0px!important;
 	  }
 	  .avatar-uploader-icon {
 	    font-size: 28px;
@@ -195,7 +200,7 @@
 	  .avatar {
 	    width: 130px;
 	    height: 130px;
-	    display: block;
+
 	  }
 
 	 /* 优惠详情对话框的样式*/

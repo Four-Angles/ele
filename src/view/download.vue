@@ -1,5 +1,5 @@
 <template>
-	<div id="download" @keyup.enter="submitForm('ruleForm2')">
+	<div id="download"  @keyup.enter="submitForm('ruleForm2')">
 		<h1>elm后台管理系统</h1>
 		<div class="DivForm">
 		<el-form :model="ruleForm2" :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
@@ -9,7 +9,7 @@
             <el-form-item  prop="checkPass">
 		    <el-input type="password" prop="checkPass" v-model="ruleForm2.checkPass" placeholder="密码" auto-complete="off"></el-input>
 		    </el-form-item>
-		    <el-button type="primary" @click="submitForm('ruleForm2')">登录</el-button>
+		    <el-button type="primary" @click="submitForm('ruleForm2')" :loading="loading">登录</el-button>
 
 		    <!-- <el-button @click="resetForm('ruleForm2')">重置</el-button> -->
 
@@ -47,6 +47,7 @@ export default {
         }
       };
       return {
+      	loading: false,
         ruleForm2: {
           checkUser: '',
           checkPass: ''
@@ -65,6 +66,7 @@ export default {
 	    submitForm(formName) {
 	        this.$refs[formName].validate((valid) => {
 	          	if (valid) {
+	          		this.loading = true;
 	          		sessionStorage.setItem("username",this.ruleForm2.checkUser);
 		            this.$router.push('/manager');
 		        } else {

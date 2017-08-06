@@ -1,6 +1,56 @@
 <template>
 	<div id="ord">
-		<el-table :data="tableData" border style="width:800PX;max-wight:800px;margin:0 auto">
+		<el-table
+		    :data="tableData"
+		    style="width: 100%">
+		    <el-table-column type="expand">
+		      <template scope="props">
+		        <el-form label-position="left" inline class="demo-table-expand">
+		          <el-form-item label="用户名">
+		            <span>{{ props.row.userName }}</span>
+		          </el-form-item>
+		          <el-form-item label="店铺名称">
+		            <span>{{ props.row.shopName }}</span>
+		          </el-form-item>
+		          <el-form-item label="收货地址">
+		            <span>{{ props.row.takeAddress }}</span>
+		          </el-form-item>
+		          <el-form-item label="店铺 ID">
+		            <span>{{ props.row.shopId }}</span>
+		          </el-form-item>		        
+		          <el-form-item label="店铺地址">
+		            <span>{{ props.row.shopAddress }}</span>
+		          </el-form-item>
+		          
+		        </el-form>
+		      </template>
+		    </el-table-column>
+		    <el-table-column
+		      label="订单 ID"
+		      prop="orderId">
+		    </el-table-column>
+		    <el-table-column
+		      label="总价格"
+		      prop="price">
+		    </el-table-column>
+		    <el-table-column
+		      label="订单状态"
+		      prop="state">
+		      <template scope="scope">		         
+		         <el-tag :type="scope.row.state=='支付成功'?'success':'danger'">{{scope.row.state}}</el-tag>
+		      </template>
+		    </el-table-column>
+		  </el-table>
+		  <div class="block">		   
+		     <el-pagination
+		       
+		       :current-page.sync="currentPage1"
+		       :page-size="100"
+		       layout="total, prev, pager, next"
+		       :total="1000">
+		     </el-pagination>
+		   </div>
+		<!-- <el-table :data="tableData" border style="width:800PX;max-wight:800px;margin:0 auto">
 	    	<el-table-column prop="date" label="日期" sortable width="120"> </el-table-column>
 	    	<el-table-column prop="number" label="订单号" sortable width="120"></el-table-column>
 	    	<el-table-column prop="goods" label="商品名称" width="120"></el-table-column>
@@ -16,7 +66,7 @@
         			<el-button size="small" type="danger" @click="deleted(scope.$index,scope.row)" >删除</el-button>
         		</template>
     		</el-table-column>
-	  	</el-table> 
+	  	</el-table>  -->
 	</div>
 </template>
 
@@ -24,7 +74,8 @@
 	export default {
 	    data() {
 	      return {
-	        tableData: []			
+	        tableData: [],
+	        currentPage1: 1,
 	      }
 	    },
 	    created(){
@@ -39,38 +90,37 @@
 				});
 	    },
 	    methods: {
-	      	/*formatter(row, column) {
-	        	return row.address;
-	      	},*/
-	      	filterTag(value, row) {
-	        	return row.tag === value;
+	      	
+	      
 	      	},
-	      	pingjia(){
-	      		this.$prompt('请填写评价', '评价',{
-	      			confirmButtonText:'确定',
-	      			cancelButtonText:'取消',
-	      			inputValue:""
-	      		}).then(({value}) => {
-	      			this.$message({
-	      				type:'success',
-	      				message:'评价成功!'
-	      			});
-	      		})/*.catch(() =>{
-	      			this.$message({
-	      				type:'info',
-	      				message:'取消评价'
-	      			})
-	      		})*/
-	      	},
-	      	deleted(index,row){
-	      		console.log(index,row);
-	      		this.tableData.splice(index,1);
-	      	}
-	    }
+	      	
+	    
   }
 </script>
 <style>
  #ord{
-	padding:50px 10px; 
+ 	margin: 5px;
+ 	margin-top: 50px;
+	width: 79%;
+	float: right;
 } 
+/*列表位置宽度*/
+.el-table{
+	width: 99%!important;
+	margin: 10px auto; 
+}
+
+/*列表内容样式设置*/
+.demo-table-expand {
+    font-size: 0;
+}
+.demo-table-expand label {
+    width: 90px;
+    color: #99a9bf;
+}
+.demo-table-expand .el-form-item {
+    margin-right: 0;
+    margin-bottom: 0;
+    width: 50%;
+}
 </style>

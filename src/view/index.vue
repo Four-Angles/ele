@@ -15,37 +15,134 @@
 			<div class="col"><p>{{orders}}<small>订单</small></p></div>
 			<div class="col"><p>{{managers}}<small>管理员</small></p></div>
 		</div>
+		<br/>
+        <!-- 图表 -->
+        <ve-line :data="chartData" :settings="chartSettings" width="870px" height="450px"></ve-line>
 	</div>
 </template>
 <script>
 	var today = new Date();
+	var today2 = today;
 	var year = today.getFullYear();
 	var month = today.getMonth()>9?today.getMonth()+1:'0'+(today.getMonth()+1);
 	var day = today.getDate()>9?today.getDate():'0'+today.getDate();
 	var date = year+"-"+month+"-"+day;
+	// var sixAPI = 0;
+	// var sixUser = 0;
+	// var sixOrder = 0;
+	// var sixManager = 0;
+
 	export default {
+		created: function () {
+			this.createCanvas();
+		},
 		data(){
 			return {
-				API:'',
-				user:'',
-				order:'',
-				manager:'',
-				APIs:'',
-				users:'',
-				orders:'',
-				managers:''
+				API:0,
+				user:0,
+				order:0,
+				manager:0,
+				APIs:0,
+				users:0,
+				orders:0,
+				managers:0,
+				sixDates:[],
+				sixAPIs:[],
+				sixUsers:[],
+				sixOrders:[],
+				sixManagers:[],
+				sixAPI:0,
+				sixUser:0,
+				sixOrder:0,
+				sixManager:0,
+				chartSettings:{},
+				chartData:{}
 			}
 		},
 		methods:{
+			//获取过去六天的日期
+			getPassDate:function(){
+				today2.setDate(today.getDate() - 6);
+				var dateTemp;
+				var flag = 1;
+				for (var i = 0; i < 6; i++) {
+				    dateTemp = today2.getFullYear()+"-"+(today2.getMonth()>9?today2.getMonth()+1:'0'+(today2.getMonth()+1))+"-"+(today2.getDate()>9?today2.getDate():'0'+today2.getDate());
+				    this.sixDates.push(dateTemp);
+				    today2.setDate(today2.getDate() + flag);
+				    console.log(this.sixDates[i]);
+				}
+				this.createCanvas();
+				return true;
+			},
+			//获取过去六天的API请求量
+			getPassAPIs:function(){
+				this.$http.get('http://cangdu.org:8001/statis/api/'+this.sixDates[this.sixAPI]+'/count').then(function(res){
+					this.sixAPIs[this.sixAPI] = res.body.count>100000?(res.body.count/10000).toFixed(2):res.body.count;
+					this.createCanvas();
+					console.log(this.sixAPI+"PassAPIs:"+this.sixAPIs[this.sixAPI]);
+					this.sixAPI++;
+					if (this.sixAPI<6) {
+						this.getPassAPIs();
+					};
+				},function(res){
+					console.log("get PassAPIs error");
+				});
+			},
+			//获取过去六天的新注册用户
+			getPassUsers:function(){
+				this.$http.get('http://cangdu.org:8001/statis/user/'+this.sixDates[this.sixUser]+'/count').then(function(res){
+					this.sixUsers[this.sixUser] = res.body.count>100000?(res.body.count/10000).toFixed(2):res.body.count;
+					this.createCanvas();
+					console.log(this.sixUser+"PassUsers:"+this.sixUsers[this.sixUser]);
+					this.sixUser++;
+					if (this.sixUser<6) {
+						this.getPassUsers();
+					};
+				},function(res){
+					console.log("get PassUsers error");
+				});
+				
+			},
+			//获取过去六天的新增订单
+			getPassOrders:function(){
+					this.$http.get('http://cangdu.org:8001/statis/order/'+this.sixDates[this.sixOrder]+'/count').then(function(res){
+						this.sixOrders[this.sixOrder] = res.body.count>100000?(res.body.count/10000).toFixed(2):res.body.count;
+						this.createCanvas();
+						console.log(this.sixOrder+"PassOrders:"+this.sixOrders[this.sixOrder]);
+						this.sixOrder++;
+						if (this.sixOrder<6) {
+							this.getPassOrders();
+						};
+					},function(res){
+						console.log("get PassOrders error");
+					});
+				
+			},
+			//获取过去六天的新增管理员
+			getPassManagers:function(){
+				this.$http.get('http://cangdu.org:8001/statis/admin/'+this.sixDates[this.sixManager]+'/count').then(function(res){
+					this.sixManagers[this.sixManager] = res.body.count>100000?(res.body.count/10000).toFixed(2):res.body.count;
+					this.createCanvas();
+					console.log(this.sixManager+"PassManagers:"+this.sixManagers[this.sixManager]);
+					this.sixManager++;
+					if (this.sixManager<6) {
+						this.getPassManagers();
+					};
+				},function(res){
+					console.log("get PassManagers error");
+				});
+				
+			},
 			getAPIandAPIs:function(){				
 				this.$http.get('http://cangdu.org:8001/statis/api/'+date+'/count').then(function(res){
 					this.API = res.body.count>100000?(res.body.count/10000).toFixed(2):res.body.count;
-					console.log("right");
+					this.createCanvas();
 				},function(res){
 					console.log("get API error");
 				});
 				this.$http.get('http://cangdu.org:8001/statis/api/count').then(function(res){
 					this.APIs = res.body.count>100000?(res.body.count/10000).toFixed(2):res.body.count;
+					this.createCanvas();
 				},function(res){
 					console.log("get APIs error");
 				});
@@ -53,12 +150,13 @@
 			getUserandUsers:function(){
 				this.$http.get('http://cangdu.org:8001/statis/user/'+date+'/count').then(function(res){
 					this.user = res.body.count>100000?(res.body.count/10000).toFixed(2):res.body.count;
-					console.log("right");
+					this.createCanvas();
 				},function(res){
 					console.log("get user error");
 				});
 				this.$http.get('http://cangdu.org:8001/v1/users/count').then(function(res){
 					this.users = res.body.count>100000?(res.body.count/10000).toFixed(2):res.body.count;
+					this.createCanvas();
 				},function(res){
 					console.log("get users error");
 				});
@@ -66,12 +164,13 @@
 			getOrderandOrders:function(){
 				this.$http.get('http://cangdu.org:8001/statis/order/'+date+'/count').then(function(res){
 					this.order = res.body.count>100000?(res.body.count/10000).toFixed(2):res.body.count;
-					console.log("right");
+					this.createCanvas();
 				},function(res){
 					console.log("get order error");
 				});
 				this.$http.get('http://cangdu.org:8001/bos/orders/count').then(function(res){
 					this.orders = res.body.count>100000?(res.body.count/10000).toFixed(2):res.body.count;
+					this.createCanvas();
 				},function(res){
 					console.log("get orders error");
 				});
@@ -79,22 +178,58 @@
 			getManagerandManagers:function(){
 				this.$http.get('http://cangdu.org:8001/statis/admin/'+date+'/count').then(function(res){
 					this.manager = res.body.count>100000?(res.body.count/10000).toFixed(2):res.body.count;
-					console.log("right");
+					this.createCanvas();
 				},function(res){
-					console.log("get Manager error");
+					console.log("get manager error");
 				});
 				this.$http.get('http://cangdu.org:8001/admin/count').then(function(res){
 					this.managers = res.body.count>100000?(res.body.count/10000).toFixed(2):res.body.count;
+					this.createCanvas();
 				},function(res){
-					console.log("get Managers error");
+					console.log("get managers error");
 				});
+			},
+			createCanvas:function(){
+				this.chartData = {
+			      columns: ['日期', 'API请求量', '新注册用户', '新增订单', '新增管理员'],
+			      rows: [
+			        
+			        { '日期': this.sixDates[0], 'API请求量': this.sixAPIs[0],'新注册用户': this.sixUsers[0], '新增订单': this.sixOrders[0],'新增管理员': this.sixManagers[0] },
+			        { '日期': this.sixDates[1], 'API请求量': this.sixAPIs[1], '新注册用户': this.sixUsers[1], '新增订单': this.sixOrders[1],'新增管理员': this.sixManagers[1] },
+			        { '日期': this.sixDates[2], 'API请求量': this.sixAPIs[2], '新注册用户': this.sixUsers[2], '新增订单': this.sixOrders[2], '新增管理员': this.sixManagers[2] },
+			        { '日期': this.sixDates[3], 'API请求量': this.sixAPIs[3], '新注册用户': this.sixUsers[3], '新增订单':this.sixOrders[3], '新增管理员': this.sixManagers[3] },
+			        { '日期': this.sixDates[4], 'API请求量': this.sixAPIs[4], '新注册用户': this.sixUsers[4], '新增订单': this.sixOrders[4], '新增管理员': this.sixManagers[4] },
+			        { '日期': this.sixDates[5], 'API请求量': this.sixAPIs[5], '新注册用户': this.sixUsers[5], '新增订单': this.sixOrders[5], '新增管理员': this.sixManagers[5] },
+			        { '日期': date, 'API请求量': this.API, '新注册用户': this.user, '新增订单': this.order, '新增管理员': this.manager }
+			      ]
+			    }
+			    this.chartSettings = {
+			      dimension: ['日期'],
+			      metrics: [ 'API请求量','新注册用户', '新增订单','新增管理员'],
+			      axisSite: { right: ['新注册用户', '新增订单','新增管理员'] },
+			      yAxisType: ['normal'],
+			      yAxisName: ['API请求量', '新注册用户', '新增订单','新增管理员'],
+			      area: false,
+			      stack: {
+			        '数据': ['新注册用户','新增订单','新增管理员']
+			      },
+			      min:[0],
+			      max:[200000,400]
+			      // nullAddZero:true
+			    }
 			}
 		},
 		mounted:function(){
-			this.getAPIandAPIs();
-			this.getUserandUsers();
-			this.getOrderandOrders();
-			this.getManagerandManagers();
+			if(this.getPassDate()){
+				this.getPassAPIs();
+				this.getPassUsers();
+				this.getPassOrders();
+				this.getPassManagers();
+				this.getAPIandAPIs();
+				this.getUserandUsers();
+				this.getOrderandOrders();
+				this.getManagerandManagers();
+			}
 		}
 
 	}

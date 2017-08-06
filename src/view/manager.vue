@@ -1,9 +1,15 @@
 <template>
 	<div id="manager">
 		
-		<my_sidebar></my_sidebar>
-		
-		<router-view></router-view>
+		<my_sidebar></my_sidebar>		
+
+		<!-- ycAudrey 2017-8-6 start -->
+		<keep-alive>
+			<router-view v-if="$route.meta.keep_alive"></router-view>
+		</keep-alive>
+			<router-view v-if="!$route.meta.keep_alive"></router-view>
+		<!-- ycAudrey 2017-8-6 end -->
+
 		<my_nav></my_nav>
 		
  	</div>

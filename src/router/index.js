@@ -30,13 +30,13 @@ export default new Router({
       children:[
           { path: 'users',component:Users},
           { path: 'managers',component:Managers},
-          { path: 'sellers',component:Sellers},
+          { path: 'sellers',component:Sellers,meta:{keep_alive: true}},
           { path: 'foodlist',component:Foodlist},
           { path: 'orders',component:Orders},
           { path: 'addshops',component:Addshops},
           { path: 'addfoods',component:Addfoods},
           // ycAudrey 2017-8-3 
-          { path: 'index',component:Index},
+          { path: 'index',component:Index,meta:{keep_alive: true}},
 
           //添加个人信息菜单 
           { path: 'personalInfo', component:Person }   

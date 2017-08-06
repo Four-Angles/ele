@@ -13,7 +13,7 @@
 </template>
 <script>
 	export default{
-		name:'#breadNav',
+		name:'breadNav',
 		created() {
 		        this.getBreadcrumb()
 		      },
@@ -23,24 +23,29 @@
 	         };
 	      },
 		methods:{
-			getBreadcrumb() {
+			getBreadcrumb() {				
 			  console.log('----', this.$route.matched)
 			  let matched = this.$route.matched.filter(item => item.name);
 			  const first = matched[0];
 			  if (first && (first.name !== '首页' || first.path !== '')) {
-			    matched = [{ name: '首页', path: '/' }].concat(matched)
+			    matched = [].concat(matched);
+			    console.log("matched:",matched);
 			  }
 			  console.log('面包屑:',matched);
 			  this.navList = matched;
 			}
 		},
+
+			
 		watch: {
 		  $route() {
 		    this.getBreadcrumb();
 		  }
 		}
+	
 		
 	}
+
 
 </script>
 <style>
@@ -50,7 +55,10 @@
 	top: 0px;
 	margin: 5px;
 	width: 79%;
-    line-height: 50px
-
+	height: 50px;
+	padding-left: 15px;
+	padding-top: 15px;
+	box-sizing: border-box;
+    background-color:#eff2f7;
 }
 </style>

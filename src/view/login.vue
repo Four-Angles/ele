@@ -25,44 +25,47 @@
 <script>
 export default {
     data() {
-      var validateUser = (rule, value, callback) => {
-        if (value === '') {
-          	callback(new Error('请输入用户名'));
-        }else if(value != 'test'){
-        	callback(new Error('输入用户名错误'));
-        }else {
-          if (this.ruleForm2.checkPass === 'test') {
-            this.$refs.ruleForm2.validateField('checkPass');
-          }
-          callback();
-        }
-      };
-      var validatePass = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请输入密码'));
-        } else if (value !== '123') {
-          callback(new Error('输入密码错误'));
-        } else {
-          callback();
-        }
-      };
-      return {
-      	loading: false,
-        ruleForm2: {
-          checkUser: '',
-          checkPass: ''
-        },
-        rules2: {
-          checkUser: [
-            { validator: validateUser, trigger: 'blur' }
-          ],
-          checkPass: [
-            { validator: validatePass, trigger: 'blur' }
-          ]
-        }
-      };
+    	//校验用户名
+    	var validateUser = (rule, value, callback) => {
+    		if (value === '') {
+    			callback(new Error('请输入用户名'));
+    		}else if(value != 'test'){
+    			callback(new Error('输入用户名错误'));
+    		}else {
+    			if (this.ruleForm2.checkPass === 'test') {
+    				this.$refs.ruleForm2.validateField('checkPass');
+    			}
+    			callback();
+    		}
+    	};
+      	//校验密码
+      	var validatePass = (rule, value, callback) => {
+      		if (value === '') {
+      			callback(new Error('请输入密码'));
+      		} else if (value !== '123') {
+      			callback(new Error('输入密码错误'));
+      		} else {
+      			callback();
+      		}
+      	};
+      	return {
+      		loading: false,
+      		ruleForm2: {
+      			checkUser: '',
+      			checkPass: ''
+      		},
+      		rules2: {
+      			checkUser: [
+      			{ validator: validateUser, trigger: 'blur' }
+      			],
+      			checkPass: [
+      			{ validator: validatePass, trigger: 'blur' }
+      			]
+      		}
+      	};
     },
     methods: {
+    	//登录时校验登录信息
 	    submitForm(formName) {
 	        this.$refs[formName].validate((valid) => {
 	          	if (valid) {

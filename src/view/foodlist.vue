@@ -196,8 +196,8 @@
 		    getData(){
 		    	this.$http.get('../../static/data/data-foodlist.json').then(response => {
 
-		    		var data = response.body;
-		    		console.log(data.length);
+		    		var data = response.body.data;
+		    		console.log(data);
 
 					//this.foodlistdata = data;
 					if(data){ 

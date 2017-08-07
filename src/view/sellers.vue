@@ -155,9 +155,9 @@
 		name:'sellers',
 		data() {
 	 	       return {
-	 	       	total:0,
-	 	       	currentPage1: 1,
-	 	       	list:[],
+	 	       	total:0, //总条数
+	 	       	currentPage1: 1, //当前页
+	 	       	list:[], 
 	 	       	loading:false,
 	 	       	indexOfSelected:0,
 	 	       	myForm:{},
@@ -167,6 +167,7 @@
 	 	       	offset:0 ,//默认跳过多少条数据
 	 	       	limit:20, //请求数据的数量，默认20
 	 	       	dialogFormVisible:false,
+	 	       	//下拉框选项
 	 	       	options:[
 	 	       		{
 	 	       			value:'A',
@@ -303,7 +304,7 @@
 					navigator.geolocation.getCurrentPosition(this.setPosition,this.getData);
 				}
 			},
-			//修改按钮
+			//编辑按钮
 			handleEdit:function(index){
 				this.indexOfSelected = index;
 				this.ListCategoryToCategory(index);
@@ -320,11 +321,12 @@
 				console.log('删除 id='+this.list[index].id+" 成功！");
 				this.list.splice(index,1);
 			},
+
 			//图片上传成功
 			handleAvatarSuccess:function(res, file) {
-			        this.list[this.indexOfSelected]['image_path'] = URL.createObjectURL(file.raw);
+			    this.list[this.indexOfSelected]['image_path'] = URL.createObjectURL(file.raw);
 			},
-			//编辑确定时将新的options转化为数组的options
+			//确定后，将下拉框选项的值更新到数组对应的值
 			categoryToListCategory:function(index){
 				for(var i=0;i<this.options.length;i++){
 					if(this.options[i]['value']==this.myCategory[0]){
@@ -337,7 +339,7 @@
 					};
 				}
 			},
-			//点击编辑时数组的options转化为myForm的options
+			//编辑时，将数组的值转换到下拉框选项对应的值
 			ListCategoryToCategory:function(index){
 				this.myCategory = [];
 				var cate = this.list[index].category.split("/");

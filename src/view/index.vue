@@ -27,34 +27,31 @@
 	var month = today.getMonth()>9?today.getMonth()+1:'0'+(today.getMonth()+1);
 	var day = today.getDate()>9?today.getDate():'0'+today.getDate();
 	var date = year+"-"+month+"-"+day;
-	// var sixAPI = 0;
-	// var sixUser = 0;
-	// var sixOrder = 0;
-	// var sixManager = 0;
-
 	export default {
-		created: function () {
-			this.createCanvas();
-		},
 		data(){
 			return {
+				//当天数据
 				API:0,
 				user:0,
 				order:0,
 				manager:0,
+				//总数据
 				APIs:0,
 				users:0,
 				orders:0,
 				managers:0,
+				//过去六天的数据
 				sixDates:[],
 				sixAPIs:[],
 				sixUsers:[],
 				sixOrders:[],
 				sixManagers:[],
+				//过去六天数据的索引
 				sixAPI:0,
 				sixUser:0,
 				sixOrder:0,
 				sixManager:0,
+				//v-chart相关属性
 				chartSettings:{},
 				chartData:{}
 			}
@@ -133,6 +130,7 @@
 				});
 				
 			},
+			//获取当天API访问量、总API访问量
 			getAPIandAPIs:function(){				
 				this.$http.get('http://cangdu.org:8001/statis/api/'+date+'/count').then(function(res){
 					this.API = res.body.count>100000?(res.body.count/10000).toFixed(2):res.body.count;
@@ -147,6 +145,7 @@
 					console.log("get APIs error");
 				});
 			},
+			//获取当天注册用户量、总注册用户量
 			getUserandUsers:function(){
 				this.$http.get('http://cangdu.org:8001/statis/user/'+date+'/count').then(function(res){
 					this.user = res.body.count>100000?(res.body.count/10000).toFixed(2):res.body.count;
@@ -161,6 +160,7 @@
 					console.log("get users error");
 				});
 			},
+			//获取当天订单量、总订单量
 			getOrderandOrders:function(){
 				this.$http.get('http://cangdu.org:8001/statis/order/'+date+'/count').then(function(res){
 					this.order = res.body.count>100000?(res.body.count/10000).toFixed(2):res.body.count;
@@ -175,6 +175,7 @@
 					console.log("get orders error");
 				});
 			},
+			//获取当天新增管理员数量、总新增管理员数量
 			getManagerandManagers:function(){
 				this.$http.get('http://cangdu.org:8001/statis/admin/'+date+'/count').then(function(res){
 					this.manager = res.body.count>100000?(res.body.count/10000).toFixed(2):res.body.count;
@@ -189,6 +190,7 @@
 					console.log("get managers error");
 				});
 			},
+			//创建图表
 			createCanvas:function(){
 				this.chartData = {
 			      columns: ['日期', 'API请求量', '新注册用户', '新增订单', '新增管理员'],
@@ -219,6 +221,9 @@
 			    }
 			}
 		},
+		created: function () {
+			this.createCanvas();
+		},
 		mounted:function(){
 			if(this.getPassDate()){
 				this.getPassAPIs();
@@ -231,7 +236,6 @@
 				this.getManagerandManagers();
 			}
 		}
-
 	}
 </script>
 <style>
@@ -239,6 +243,7 @@
 		margin: 5px;
 		width: 79%;
 		float: right;
+		margin-top: 53px;
 	}
 	#index h1{
 		text-align: center;

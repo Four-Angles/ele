@@ -101,6 +101,7 @@
 		margin: 5px;
 		width: 79%;
 		float: right;
+		margin-top: 53px;
 	}
 	#sellers h1{
 		text-align: center;
@@ -154,17 +155,18 @@
 		name:'sellers',
 		data() {
 	 	       return {
-	 	       	total:0,
-	 	       	currentPage1: 1,
-	 	       	list:[],
+	 	       	total:0, //总条数
+	 	       	currentPage1: 1, //当前页
+	 	       	list:[], 
 	 	       	loading:false,
-	 	       	indexOfSelected:0,
+	 	       	indexOfSelected:0, 
 	 	       	myCategory:[],
 	 	       	longitude:139.6917064,//默认经度
 	 	       	latitude:23.12908,//默认维度
 	 	       	offset:0 ,//默认跳过多少条数据
 	 	       	limit:20, //请求数据的数量，默认20
 	 	       	dialogFormVisible:false,
+	 	       	//下拉框选项
 	 	       	options:[
 	 	       		{
 	 	       			value:'A',
@@ -272,23 +274,28 @@
 					navigator.geolocation.getCurrentPosition(this.setPosition,this.getData);
 				}
 			},
+			//编辑按钮
 			handleEdit:function(index){
 				this.indexOfSelected = index;
 				this.ListCategoryToCategory(index);
 				this.dialogFormVisible = true;
 				
 			},
+			//添加食品按钮
 			handleAdd:function(index){
 				this.$router.push({path:'addfoods'});
 			},
+			//删除按钮
 			handleDelete:function(index){
 				this.$message('删除 "'+this.list[index].name+'" 成功!');
 				console.log('删除 id='+this.list[index].id+" 成功！");
 				this.list.splice(index,1);
 			},
+			//添加图片成功按钮
 			handleAvatarSuccess:function(res, file) {
-			        this.list[this.indexOfSelected]['image_path'] = URL.createObjectURL(file.raw);
+			    this.list[this.indexOfSelected]['image_path'] = URL.createObjectURL(file.raw);
 			},
+			//确定后，将下拉框选项的值更新到数组对应的值
 			categoryToListCategory:function(index){
 				for(var i=0;i<this.options.length;i++){
 					if(this.options[i]['value']==this.myCategory[0]){
@@ -301,6 +308,7 @@
 					};
 				}
 			},
+			//编辑时，将数组的值转换到下拉框选项对应的值
 			ListCategoryToCategory:function(index){
 				this.myCategory = [];
 				var cate = this.list[index].category.split("/");
@@ -316,6 +324,7 @@
 					}
 				}
 			},
+			//确定按钮
 			confirm:function(){
 				this.categoryToListCategory(this.indexOfSelected);
 				this.dialogFormVisible = false;

@@ -1,10 +1,10 @@
 <template>
 	<div id="sellers">
 		<h1>商家列表</h1>		
-  <el-table v-loading.body="loading"
+  <el-table
     :data="list"
     style="width: 100%;">
-    <el-table-column type="expand">
+    <el-table-column type="expand" v-loading.body="loading">
       <template scope="props">
         <el-form  label-position="left"  inline  class="demo-table-expand">
           <el-form-item 
@@ -61,18 +61,18 @@
     </el-pagination>
 
 	<el-dialog title="修改店铺信息" :visible.sync="dialogFormVisible">
-	  <el-form :model="list[indexOfSelected]">
+	  <el-form :model="myForm">
 	      <el-form-item label="店铺名称" :label-width="100">
-	      <el-input v-model="list[indexOfSelected].name" auto-complete="off"></el-input>
+	      <el-input v-model="myForm.name" auto-complete="off"></el-input>
 	    </el-form-item>
 	    <el-form-item label="详细地址" :label-width="100">
-	      <el-input v-model="list[indexOfSelected].address" auto-complete="off"></el-input>
+	      <el-input v-model="myForm.address" auto-complete="off"></el-input>
 	    </el-form-item>
 	    <el-form-item label="店铺介绍" :label-width="100">
-	      <el-input v-model="list[indexOfSelected].description" auto-complete="off"></el-input>
+	      <el-input v-model="myForm.description" auto-complete="off"></el-input>
 	    </el-form-item>
 	    <el-form-item label="联系电话" :label-width="100">
-	      <el-input v-model="list[indexOfSelected].phone" auto-complete="off"></el-input>
+	      <el-input v-model="myForm.phone" auto-complete="off"></el-input>
 	    </el-form-item>
 	    <el-form-item label="店铺分类" :label-width="100">
 	      <el-cascader :options="options" v-model="myCategory" change-on-select></el-cascader>
@@ -83,7 +83,7 @@
 	         action="https://jsonplaceholder.typicode.com/posts/"
 	         :show-file-list="false"
 	         :on-success="handleAvatarSuccess">
-	         <img v-if="list[indexOfSelected]['image_path']" :src="'http://images.cangdu.org/'+list[indexOfSelected]['image_path']" class="avatar">
+	         <img v-if="myForm['image_path']" :src="'http://images.cangdu.org/'+myForm['image_path']" class="avatar">
 	         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
 	       </el-upload>
 	    </el-form-item>
@@ -101,6 +101,7 @@
 		margin: 5px;
 		width: 79%;
 		float: right;
+		margin-top: 53px;
 	}
 	#sellers h1{
 		text-align: center;
@@ -159,6 +160,7 @@
 	 	       	list:[],
 	 	       	loading:false,
 	 	       	indexOfSelected:0,
+	 	       	myForm:{},
 	 	       	myCategory:[],
 	 	       	longitude:139.6917064,//默认经度
 	 	       	latitude:23.12908,//默认维度
@@ -171,17 +173,21 @@
 	 	       			label:'小吃夜宵',
 	 	       			children:[
 	 	       				{value:'A001',label:'小龙虾'},
+	 	       				{value:'A002',label:'地方小吃'},
 	 	       				{value:'A003',label:'烧烤'},
+	 	       				{value:'A004',label:'炸记炸串'},
 	 	       				{value:'A005',label:'鸭脖卤味'},
+	 	       				{value:'A006',label:'零食'}
 	 	       			]
 	 	       		},
 	 	       		{
 	 	       			value:'B',
 	 	       			label:'异国料理',
 	 	       			children:[
-	 	       				{value:'B001',label:'西餐'},
-	 	       				{value:'B002',label:'披萨意面'},
-	 	       				{value:'B003',label:'东南亚菜'}
+	 	       				{value:'B001',label:'日韩料理'},
+	 	       				{value:'B002',label:'西餐'},
+	 	       				{value:'B003',label:'披萨意面'},
+	 	       				{value:'B004',label:'东南亚菜'}
 	 	       			]
 	 	       		},
 	 	       		{
@@ -199,7 +205,13 @@
 	 	       			children:[
 	 	       				{value:'D001',label:'超市'},
 	 	       				{value:'D002',label:'便利店'},
-	 	       				{value:'D003',label:'名酒坊'}
+	 	       				{value:'D003',label:'名酒坊'},
+	 	       				{value:'D004',label:'零食饮料'},
+	 	       				{value:'D005',label:'水站'},
+	 	       				{value:'D006',label:'茶'},
+	 	       				{value:'D007',label:'奶站'},
+	 	       				{value:'D008',label:'粮油'},
+	 	       				{value:'D009',label:'美妆母婴'}
 	 	       			]
 	 	       		},
 	 	       		{
@@ -207,17 +219,35 @@
 	 	       			label:'特色菜系',
 	 	       			children:[
 	 	       				{value:'E001',label:'川湘菜'},
-	 	       				{value:'E002',label:'粤菜'},
-	 	       				{value:'E003',label:'江浙菜'}
+	 	       				{value:'E002',label:'其他菜系'},
+	 	       				{value:'E003',label:'江浙菜'},
+	 	       				{value:'E004',label:'粤菜'},
+	 	       				{value:'E005',label:'海鲜'},
+	 	       				{value:'E006',label:'火锅烤鱼'},
+	 	       				{value:'E007',label:'东北菜'},
+	 	       				{value:'E008',label:'西北菜'},
+	 	       				{value:'E009',label:'云南菜'},
+	 	       				{value:'E010',label:'新疆菜'},
+	 	       				{value:'E011',label:'鲁菜'}
 	 	       			]
 	 	       		},
 	 	       		{
 	 	       			value:'F',
 	 	       			label:'快餐便当',
 	 	       			children:[
-	 	       				{value:'F001',label:'盖浇饭'},
-	 	       				{value:'F002',label:'米粉面馆'},
-	 	       				{value:'F003',label:'包子粥店'}
+	 	       				{value:'F001',label:'简餐'},
+	 	       				{value:'F002',label:'盖浇饭'},
+	 	       				{value:'F003',label:'米粉面馆'},
+	 	       				{value:'F004',label:'包子粥店'},
+	 	       				{value:'F005',label:'香锅砂锅'},
+	 	       				{value:'F006',label:'麻辣烫'},
+	 	       				{value:'F007',label:'饺子馄饨'},
+	 	       				{value:'F008',label:'汉堡'},
+	 	       				{value:'F009',label:'生煎锅贴'},
+	 	       				{value:'F010',label:'黄焖鸡米饭'},
+	 	       				{value:'F011',label:'烧腊饭'},
+	 	       				{value:'F012',label:'煲仔饭'},
+	 	       				{value:'F013',label:'咖喱饭'}
 	 	       			]
 	 	       		},
 	 	       		{
@@ -235,7 +265,8 @@
 	 	       			children:[
 	 	       				{value:'H001',label:'水果'},
 	 	       				{value:'H002',label:'蔬菜'},
-	 	       				{value:'H003',label:'生鲜'}
+	 	       				{value:'H003',label:'生鲜'},
+	 	       				{value:'H002',label:'海鲜水产'}
 	 	       			]
 	 	       		}
 	 	       	]
@@ -272,23 +303,28 @@
 					navigator.geolocation.getCurrentPosition(this.setPosition,this.getData);
 				}
 			},
+			//修改按钮
 			handleEdit:function(index){
 				this.indexOfSelected = index;
 				this.ListCategoryToCategory(index);
 				this.dialogFormVisible = true;
-				
+				this.myForm = JSON.parse(JSON.stringify(this.list[index]));
 			},
+			//添加食品按钮
 			handleAdd:function(index){
 				this.$router.push({path:'addfoods'});
 			},
+			//删除按钮
 			handleDelete:function(index){
 				this.$message('删除 "'+this.list[index].name+'" 成功!');
 				console.log('删除 id='+this.list[index].id+" 成功！");
 				this.list.splice(index,1);
 			},
+			//图片上传成功
 			handleAvatarSuccess:function(res, file) {
 			        this.list[this.indexOfSelected]['image_path'] = URL.createObjectURL(file.raw);
 			},
+			//编辑确定时将新的options转化为数组的options
 			categoryToListCategory:function(index){
 				for(var i=0;i<this.options.length;i++){
 					if(this.options[i]['value']==this.myCategory[0]){
@@ -301,6 +337,7 @@
 					};
 				}
 			},
+			//点击编辑时数组的options转化为myForm的options
 			ListCategoryToCategory:function(index){
 				this.myCategory = [];
 				var cate = this.list[index].category.split("/");
@@ -316,7 +353,9 @@
 					}
 				}
 			},
+			//myForm表单确定按钮
 			confirm:function(){
+				this.list[this.indexOfSelected] = JSON.parse(JSON.stringify(this.myForm));
 				this.categoryToListCategory(this.indexOfSelected);
 				this.dialogFormVisible = false;
 				// this.category = [];

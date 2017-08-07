@@ -239,6 +239,7 @@
 		margin: 5px;
 		width: 79%;
 		float: right;
+		margin-top: 53px;
 	}
 	#index h1{
 		text-align: center;

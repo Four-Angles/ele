@@ -116,6 +116,7 @@
 	</div>
 </template>
 <script>
+	import {api} from '../global/api';
 	export default{
 		name:'foodlist',
 		data() {
@@ -194,7 +195,7 @@
 
 		    //读取数据
 		    getData(){
-		    	this.$http.get('../../static/data/data-foodlist.json').then(response => {
+		    	this.$http.get(api.getFoodlist).then(response => {
 
 		    		var data = response.body.data;
 		    		console.log(data);

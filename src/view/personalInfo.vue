@@ -17,32 +17,32 @@
       <el-col :span="16">
           <div class="user_info">
               <h2>个人信息 
-                <el-button size="small" v-if="!editable" @click="editable = true" style="float:right;" icon="edit">编辑</el-button> 
+                <el-button size="small" v-if="!editable" @click="edit()" style="float:right;" icon="edit">编辑</el-button> 
               </h2>
               <div class="user_info_form" v-if="editable">             
                  <el-form label-position="right" label-width="100px" :model="personalInfo">  <el-form-item label="ID">
-                     <el-input v-model="personalInfo.id" disabled></el-input>
+                     <el-input v-model="personalform.id" disabled></el-input>
                    </el-form-item>
                    <el-form-item label="姓名">
-                     <el-input v-model="personalInfo.name"></el-input>
+                     <el-input v-model="personalform.name"></el-input>
                    </el-form-item>
                    <el-form-item label="性别">
-                     <el-radio-group v-model="personalInfo.sex">
+                     <el-radio-group v-model="personalform.sex">
                            <el-radio label="man">男</el-radio>
                            <el-radio label="woman">女</el-radio>
                      </el-radio-group>
                    </el-form-item>
                    <el-form-item label="管理员权限">
-                     <el-input v-model="personalInfo.admin"></el-input>
+                     <el-input v-model="personalform.admin"></el-input>
                    </el-form-item>
                    <el-form-item label="注册时间">
-                     <el-input v-model="personalInfo.resigndate" disabled></el-input>
+                     <el-input v-model="personalform.resigndate" disabled></el-input>
                    </el-form-item>
                    <el-form-item label="邮件地址" >
-                     <el-input v-model="personalInfo.email"></el-input>
+                     <el-input v-model="personalform.email"></el-input>
                    </el-form-item>
                    <el-form-item label="个人简介">
-                     <el-input type="textarea" v-model="personalInfo.introduction"></el-input>
+                     <el-input type="textarea" v-model="personalform.introduction"></el-input>
                    </el-form-item>
              
                    <el-form-item>
@@ -90,7 +90,7 @@
 	  data() {
 	    return {
         imageUrl:require("../img/xwz.jpg"),
-	      editable:false,
+	    editable:false,
         personalInfo:{
           id:"5499",
           name:"LLLL",
@@ -99,23 +99,39 @@
           resigndate:"2017-8-1",
           email:"123456789@qq.com",
           introduction:"我的外号叫小丸子，呵呵。我的爱好是：吃饭睡觉打豆豆。"
-        }
+        },
+        personalform:{
+          id:"",
+          name:"",
+          sex:"",
+          admin:"",
+          resigndate:"",
+          email:"",
+          introduction:""
+        },
 	    };
 	  },
     methods:{
+      //点击编辑
+      edit(){
+      	this.editable = true
+      	this.personalform = JSON.parse(JSON.stringify(this.personalInfo));
+      },
+
       //提交表单
       submitForm() {
           var vm = this;
           vm.editable = false;
           var par = {
-              "id":  vm.personalInfo.id,
-              "name": vm.personalInfo.name,
-              "sex": vm.personalInfo.sex,
-              "admin": vm.personalInfo.admin,
-              "resigndate": vm.personalInfo.resigndate,
-              "email": vm.personalInfo.email,
-              "introduction": vm.personalInfo.introduction,
+              "id":  vm.personalform.id,
+              "name": vm.personalform.name,
+              "sex": vm.personalform.sex,
+              "admin": vm.personalform.admin,
+              "resigndate": vm.personalform.resigndate,
+              "email": vm.personalform.email,
+              "introduction": vm.personalform.introduction,
           };
+          this.personalInfo = par;
 
           this.$message({
                 message: '提交信息成功',

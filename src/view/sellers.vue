@@ -4,7 +4,7 @@
   <el-table
     :data="list"
     style="width: 100%;">
-    <el-table-column type="expand" v-loading.body="loading">
+    <el-table-column type="expand">
       <template scope="props">
         <el-form  label-position="left"  inline  class="demo-table-expand">
           <el-form-item 

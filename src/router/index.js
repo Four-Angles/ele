@@ -43,7 +43,11 @@ export default new Router({
           },
 
           
+<<<<<<< HEAD
          
+=======
+
+>>>>>>> 827ed5399b5fdeda0d254af9b1f3ab09f3be637b
           //添加个人信息菜单 
           { path: 'personalInfo',name:'个人信息', component:Person }   
           

@@ -119,7 +119,14 @@ export default {
 		font-size: 12px;
 		color: red;
 	}
+<<<<<<< HEAD
 	#login .el-form{
 		width: 100%!important;
 	}
 </style>
+=======
+  #login .el-form{
+		width: 100%!important;
+	}
+</style>
+>>>>>>> 827ed5399b5fdeda0d254af9b1f3ab09f3be637b

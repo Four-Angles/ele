@@ -71,6 +71,7 @@
 </template>
 
 <script>
+	import {api} from '../global/api';
 	export default {
 	    data() {
 	      return {
@@ -79,7 +80,7 @@
 	      }
 	    },
 	    created(){
-	    	this.$http.get('../../static/data/orderdata.json').then(response => {
+	    	this.$http.get(api.getOrderData).then(response => {
 				// get body data
 					console.log(response);
 					console.log(response.data.tableData);

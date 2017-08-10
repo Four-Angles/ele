@@ -1,5 +1,6 @@
 {
-  "status": 1,
+  "resultCode": "0",
+  "resultMsg": "",
   "data": [
     {
       "user_name": "zhangqueup",

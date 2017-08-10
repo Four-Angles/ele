@@ -43,9 +43,9 @@ export default new Router({
           },
 
           
-          // ycAudrey 2017-8-3 
+         
           //添加个人信息菜单 
-          { path: 'personalInfo', component:Person }   
+          { path: 'personalInfo',name:'个人信息', component:Person }   
           
       ]
     },

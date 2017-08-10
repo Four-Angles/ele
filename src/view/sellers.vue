@@ -1,7 +1,7 @@
 <template>
 	<div id="sellers">
 		<h1>商家列表</h1>		
-  <el-table v-loading.body="loading"
+  <el-table
     :data="list"
     style="width: 100%;">
     <el-table-column type="expand">
@@ -38,6 +38,7 @@
         </el-form>
       </template>
     </el-table-column>
+
     <el-table-column label="店铺名称"  prop="name"></el-table-column>
     <el-table-column label="店铺地址" prop="address"></el-table-column>
     <el-table-column label="店铺介绍" prop="description"></el-table-column>
@@ -45,7 +46,7 @@
 		<template scope="scope">
 	        <el-button size="mini" @click="handleEdit(scope.$index)">编辑</el-button>
 	        <el-button size="mini" @click="handleAdd(scope.$index)">添加食品</el-button>
-	        <el-button size="mini" type="danger" @click="handleDelete(scope.$index)">删除</el-button>
+	        <el-button size="mini" type="danger" @click.prevent="handleDelete(scope.$index)">删除</el-button>
       </template>
 	</el-table-column>
   	</el-table>
@@ -59,20 +60,20 @@
       layout="total, prev, pager, next"
       :total="total">
     </el-pagination>
-
+    <!-- 编辑信息框 -->
 	<el-dialog title="修改店铺信息" :visible.sync="dialogFormVisible">
-	  <el-form :model="list[indexOfSelected]">
+	  <el-form :model="myForm">
 	      <el-form-item label="店铺名称" :label-width="100">
-	      <el-input v-model="list[indexOfSelected].name" auto-complete="off"></el-input>
+	      <el-input v-model="myForm.name" auto-complete="off"></el-input>
 	    </el-form-item>
 	    <el-form-item label="详细地址" :label-width="100">
-	      <el-input v-model="list[indexOfSelected].address" auto-complete="off"></el-input>
+	      <el-input v-model="myForm.address" auto-complete="off"></el-input>
 	    </el-form-item>
 	    <el-form-item label="店铺介绍" :label-width="100">
-	      <el-input v-model="list[indexOfSelected].description" auto-complete="off"></el-input>
+	      <el-input v-model="myForm.description" auto-complete="off"></el-input>
 	    </el-form-item>
 	    <el-form-item label="联系电话" :label-width="100">
-	      <el-input v-model="list[indexOfSelected].phone" auto-complete="off"></el-input>
+	      <el-input v-model="myForm.phone" auto-complete="off"></el-input>
 	    </el-form-item>
 	    <el-form-item label="店铺分类" :label-width="100">
 	      <el-cascader :options="options" v-model="myCategory" change-on-select></el-cascader>
@@ -83,14 +84,14 @@
 	         action="https://jsonplaceholder.typicode.com/posts/"
 	         :show-file-list="false"
 	         :on-success="handleAvatarSuccess">
-	         <img v-if="list[indexOfSelected]['image_path']" :src="'http://images.cangdu.org/'+list[indexOfSelected]['image_path']" class="avatar">
+	         <img v-if="myForm['image_path']" :src="'http://images.cangdu.org/'+myForm['image_path']" class="avatar">
 	         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
 	       </el-upload>
 	    </el-form-item>
 	  </el-form>
 	  <div slot="footer" class="dialog-footer">
 	    <el-button @click="dialogFormVisible = false">取 消</el-button>
-	    <el-button type="primary" @click="confirm()">确 定</el-button>
+	    <el-button type="primary" @click="confirm">确 定</el-button>
 	  </div>
 	</el-dialog>
 
@@ -161,6 +162,7 @@
 	 	       	loading:false,
 	 	       	indexOfSelected:0, 
 	 	       	myCategory:[],
+	 	       	myForm:{},
 	 	       	longitude:139.6917064,//默认经度
 	 	       	latitude:23.12908,//默认维度
 	 	       	offset:0 ,//默认跳过多少条数据
@@ -277,6 +279,7 @@
 			//编辑按钮
 			handleEdit:function(index){
 				this.indexOfSelected = index;
+				this.myForm = JSON.parse(JSON.stringify(this.list[index]));
 				this.ListCategoryToCategory(index);
 				this.dialogFormVisible = true;
 				
@@ -326,9 +329,10 @@
 			},
 			//确定按钮
 			confirm:function(){
+				this.list[this.indexOfSelected] = JSON.parse(JSON.stringify(this.myForm));
 				this.categoryToListCategory(this.indexOfSelected);
 				this.dialogFormVisible = false;
-				// this.category = [];
+				console.log(this.list[this.indexOfSelected]);
 			},
 			//分页功能
 			handleSizeChange(val) {

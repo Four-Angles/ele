@@ -151,6 +151,7 @@
 </style>
 
 <script>
+	import {api} from '../global/api';
 	export default{
 		name:'sellers',
 		data() {
@@ -277,14 +278,15 @@
 		methods:{
 			//获取所有商铺的数量
 			getTotal:function(){
-				this.$http.get('http://cangdu.org:8001/shopping/restaurants/count').then(function(res){
+				this.$http.get(api.getSellersCount).then(function(res){
 					this.total = res.body.count;
 				},function(res){
 				});
 			},
 			//获取所有商铺列表
 			getData:function(){
-				this.$http.get('http://cangdu.org:8001/shopping/restaurants',{params:{latitude:this.latitude,longitude:this.longitude,offset:this.offset,limit:this.limit}}).then(function(res){
+				console.log("---------------------",api.getManagersList);
+				this.$http.get(api.getSellers,{params:{latitude:this.latitude,longitude:this.longitude,offset:this.offset,limit:this.limit}}).then(function(res){
 					this.list = res.body;
 					this.loading = false;
 				},function(res){

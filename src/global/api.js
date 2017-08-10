@@ -23,6 +23,10 @@ export const api = {
             // 'tableList':url.staticPath+'/dataJson/tableList.json',//表格模拟接口
             'getOrderData':url.staticPath+'/data/orderdata.json',//表单模拟接口
             'getFoodlist':url.staticPath+'/data/data-foodlist.json',
+            'getSellers':'http://cangdu.org:8001/shopping/restaurants',
+            'getSellersCount':'http://cangdu.org:8001/shopping/restaurants/count',
+            'getManagersList':url.staticPath+'/data/data-managers.json',
+            'getUserList':url.staticPath+'/data/user-data.json',
             // "roleAndUser":url.staticPath+"/dataJson/roleAndUser.json",  //获取角色和对应用户  
             // "getMenuAndElement":url.staticPath+"/dataJson/getMenuAndElement.json",  //获取用户的 菜单和元素权限 
 

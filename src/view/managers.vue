@@ -18,11 +18,12 @@
 		</el-table>
 
 		<!--分页-->
-		<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage4" :page-sizes="[10, 20, 30, 40,50]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="453">
+		<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"  :page-sizes="[10, 20, 30, 40,50]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="453">
     </el-pagination>
 	</div>
 </template>
 <script>
+	import {api} from '../global/api';
 	export default{
 		name:'managers',
 		data() {
@@ -37,7 +38,8 @@
 		methods:{
 			//读取数据
 		    getData(){
-		    	this.$http.get('../../static/data/data-managers.json').then(response => {
+		    
+		    	this.$http.get(api.getManagersList).then(response => {
 			    		var data = response.body;
 			    		console.log(data.data);
 			    		console.log(data.length);

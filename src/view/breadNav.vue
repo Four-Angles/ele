@@ -3,7 +3,7 @@
 	
 		<el-breadcrumb separator="/">
 		 
-		  <el-breadcrumb-item v-for="(item,index) in navList" >
+		  <el-breadcrumb-item v-for="(item,index) in navList" :key="item.name">
 		  	<router-link v-if='item.redirect==="noredirect"||index==navList.length-1' to="" class="no-redirect">{{item.name}}</router-link>
 			<router-link v-else :to="item.path">{{item.name}}</router-link>
 		  </el-breadcrumb-item>

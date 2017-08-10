@@ -20,6 +20,7 @@
 		
 </template>
 <script>
+	import {api} from '../global/api';
 	export default{
 
 		name:'users',
@@ -35,7 +36,7 @@
 		methods:{
 
 			 getData(){
-		    	this.$http.get('../../static/data/user-data.json').then(response => {
+		    	this.$http.get(api.getUserList).then(response => {
 			    		// var data = response.body;
 			    	console.log(response);
 					console.log(response.data.usersdata);

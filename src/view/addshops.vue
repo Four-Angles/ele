@@ -414,6 +414,7 @@
 	          this.$refs[formName].validate((valid) => {
 	            if (valid) {
 	              alert('submit!');
+	              console.log("添加商铺信息：",this.ruleForm);
 	            } else {
 	            	alert('error submit!');
 	              console.log('error submit!!');

@@ -184,6 +184,7 @@
       					message: '必须上传食品图片',
       					 type: 'error'
       					  });
+      				console.log("添加食品信息：",this.ruleForm);
       				return false;
     			     					
 			},

@@ -2,7 +2,7 @@
 	<div id="foodlist">
 		<h1 style="text-align:center;">食品列表</h1>
 		<!--食品列表界面-->
-		<el-table :data="foodlistdata">
+		<el-table :data="foodlistdata" >
     		<el-table-column type="expand">
       			<template scope="props">
         			<el-form label-position="left" inline class="el-form--label-left demo-table-expand">
@@ -37,7 +37,8 @@
       			</template>
     		</el-table-column>
     		<el-table-column label="食品 ID" prop="food_Id"></el-table-column>
-    		<el-table-column label="食品名称" prop="foodname"></el-table-column>
+    		<el-table-column label="食品名称" prop="foodname">
+    		</el-table-column>
     		<el-table-column label="评分" prop="score"></el-table-column>
     		<el-table-column label="操作" class="action">
     			<template scope="scope" >
@@ -46,7 +47,6 @@
 		      	</template>
     		</el-table-column>
   		</el-table>
-
 		
 		<!--分页-->
   		<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="listQuery.currPage" :page-size="10" layout="total, prev, pager, next" :total="369"></el-pagination>
@@ -56,21 +56,21 @@
 
 		 <!--编辑表单-->
 		<el-dialog title="修改食品信息" :visible.sync="dialogTableVisible_edit">
-		  <el-form :model="foodlistdata[indexOfselect]">
-		    <el-form-item label="食品名称" :label-width="formLabelWidth">
-		      <el-input v-model="foodlistdata[indexOfselect].foodname" auto-complete="off"></el-input>
+		  <el-form :model="foodform">
+		    <el-form-item label="食品名称" prop="foodname" :label-width="formLabelWidth">
+		      <el-input v-model="foodform.foodname" auto-complete="off"></el-input>
 		    </el-form-item>
-		    <el-form-item label="食品介绍" :label-width="formLabelWidth">
-		     <el-input v-model="foodlistdata[indexOfselect].desc" auto-complete="off"></el-input>
+		    <el-form-item label="食品介绍" prop="desc" :label-width="formLabelWidth">
+		     <el-input v-model="foodform.desc" auto-complete="off"></el-input>
 		    </el-form-item>
-		    <el-form-item label="食品分类" :label-width="formLabelWidth">
-		        <el-select v-model="foodlistdata[indexOfselect].category" placeholder="请选择食品分类">
+		    <el-form-item label="食品分类" prop="category" :label-width="formLabelWidth">
+		        <el-select v-model="foodform.category" placeholder="请选择食品分类">
 		          <el-option v-for="(option,index) in option_category" key="index" v-bind:label="option.text" v-bind:value="option.value"></el-option>
 		        </el-select>
 		    </el-form-item>
 	       <el-form-item label="食品图片" :label-width="formLabelWidth">
 	          <el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
-	        	<img v-if="imageUrl" :src="imageUrl" class="avatar">
+	        	<img v-if="imageUrl" :src="imageUrl" class="avatar" v-model="foodform.imageUrl">
 	        	<i v-else class="el-icon-plus avatar-uploader-icon"></i>
 	      	</el-upload>
 	       </el-form-item>    
@@ -116,13 +116,19 @@
 	</div>
 </template>
 <script>
-	import {api} from '../global/api';
 	export default{
 		name:'foodlist',
 		data() {
 	      return {
+	      	dialogEditVisible:false,
 	      	formLabelWidth: '120px',
 	      	foodlistdata:[],
+	      	foodform:{
+	      		foodname:'',
+	      		desc:'',
+	      		category:'',
+	      		image_path:''
+	      	},
 	      	specdata:[],
 	      	add_spec:{
 	      		"spec_name":'',
@@ -130,7 +136,7 @@
 	      		"spec_price":''
 	      	},
 	      	imageUrl: '',
-	      	indexOfselect:0,
+	      	indexOfselect:null,
 	      	
 	        dialogTableVisible_edit:false,
 	        dialogTableVisible_addSpec:false,
@@ -166,7 +172,6 @@
     	mounted(){
     		var vm = this;
 
-    		this.indexOfselect = 0;
     		this.getData();
     		/*init_addspec = function(){
 
@@ -195,13 +200,14 @@
 
 		    //读取数据
 		    getData(){
-		    	this.$http.get(api.getFoodlist).then(response => {
+		    	this.$http.get('../../static/data/data-foodlist.json').then(response => {
 
-		    		var data = response.body.data;
+		    		var data = response.data.data;
 		    		console.log(data);
 
-					//this.foodlistdata = data;
-					if(data){ 
+		    		this.foodlistdata = data;
+
+					/*if(data){ 
 						//console.log(data.subjects);
 	                    this.foodlistdata = data;
 	              
@@ -235,11 +241,19 @@
 
 		    //编辑
 		    handleEdit(index,row){
-		    	this.indexOfselect = index;
-		    	console.log(index);
-		    	this.specdata = this.foodlistdata[index].spec;		    	
-		    	console.log(this.foodlistdata[this.indexOfselect]);  
-		    	this.dialogTableVisible_edit = true;
+		    	this.dialogTableVisible_edit = true;		  
+
+		    	//编辑弹框绑定内容
+		    	console.log("row",row);
+		    	//this.foodform =  row;
+		    	//this.foodform =  JSON.parse(JSON.stringify(row));//深度拷贝
+		    	this.foodform = Object.assign({},row);
+
+		    	this.indexOfselect = index;		
+
+		    	//添加规格表格引用数据
+		    	this.specdata = row.spec;
+
 		    },
 
 		    //食品列表删除
@@ -293,12 +307,28 @@
 			 
 			//按钮-编辑确定
 	      	edit_sure(){
-		    	this.dialogTableVisible_edit = false;
+	      		let vm = this;
 
-		    	this.$message({
-			          message: '更新食品信息成功',
-			          type: 'success'
-			    });
+	      		this.$confirm('确定修改信息?', '提示', {
+		          confirmButtonText: '确定',
+		          cancelButtonText: '取消',
+		          type: 'warning'
+		        }).then(() => {
+		 
+		    	  vm.foodlistdata[vm.indexOfselect] = vm.foodform;
+		    	  vm.dialogTableVisible_edit = false;
+
+		          this.$message({
+		            type: 'success',
+		            message: '更新食品信息成功!'
+		          });
+		        }).catch(() => {
+		          this.$message({
+		            type: 'info',
+		            message: '已取消修改'
+		          });          
+		        });
+		    	
 	      	}
     	}
 	}

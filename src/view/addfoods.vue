@@ -18,7 +18,7 @@
 		</el-form>
 		</div>  <!-- select-food2 -->
 		<div class="select-food3">
-		 <el-collapse v-model="activeNames" @change="handleChange">
+		 <el-collapse  @change="handleChange">
   			<el-collapse-item name="1" class="hide">
   			<el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" >
 				<el-form-item  label="食品种类">

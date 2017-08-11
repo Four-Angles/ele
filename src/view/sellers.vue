@@ -4,7 +4,7 @@
   <el-table
     :data="list"
     style="width: 100%;">
-    <el-table-column type="expand" v-loading.body="loading">
+    <el-table-column type="expand">
       <template scope="props">
         <el-form  label-position="left"  inline  class="demo-table-expand">
           <el-form-item 
@@ -38,6 +38,7 @@
         </el-form>
       </template>
     </el-table-column>
+
     <el-table-column label="店铺名称"  prop="name"></el-table-column>
     <el-table-column label="店铺地址" prop="address"></el-table-column>
     <el-table-column label="店铺介绍" prop="description"></el-table-column>
@@ -45,7 +46,7 @@
 		<template scope="scope">
 	        <el-button size="mini" @click="handleEdit(scope.$index)">编辑</el-button>
 	        <el-button size="mini" @click="handleAdd(scope.$index)">添加食品</el-button>
-	        <el-button size="mini" type="danger" @click="handleDelete(scope.$index)">删除</el-button>
+	        <el-button size="mini" type="danger" @click.prevent="handleDelete(scope.$index)">删除</el-button>
       </template>
 	</el-table-column>
   	</el-table>
@@ -59,7 +60,7 @@
       layout="total, prev, pager, next"
       :total="total">
     </el-pagination>
-
+    <!-- 编辑信息框 -->
 	<el-dialog title="修改店铺信息" :visible.sync="dialogFormVisible">
 	  <el-form :model="myForm">
 	      <el-form-item label="店铺名称" :label-width="100">
@@ -90,7 +91,7 @@
 	  </el-form>
 	  <div slot="footer" class="dialog-footer">
 	    <el-button @click="dialogFormVisible = false">取 消</el-button>
-	    <el-button type="primary" @click="confirm()">确 定</el-button>
+	    <el-button type="primary" @click="confirm">确 定</el-button>
 	  </div>
 	</el-dialog>
 
@@ -163,6 +164,7 @@
 	 	       	indexOfSelected:0,
 	 	       	myForm:{},
 	 	       	myCategory:[],
+	 	       	myForm:{},
 	 	       	longitude:139.6917064,//默认经度
 	 	       	latitude:23.12908,//默认维度
 	 	       	offset:0 ,//默认跳过多少条数据
@@ -309,6 +311,7 @@
 			//编辑按钮
 			handleEdit:function(index){
 				this.indexOfSelected = index;
+				this.myForm = JSON.parse(JSON.stringify(this.list[index]));
 				this.ListCategoryToCategory(index);
 				this.dialogFormVisible = true;
 				this.myForm = JSON.parse(JSON.stringify(this.list[index]));
@@ -362,7 +365,7 @@
 				this.list[this.indexOfSelected] = JSON.parse(JSON.stringify(this.myForm));
 				this.categoryToListCategory(this.indexOfSelected);
 				this.dialogFormVisible = false;
-				// this.category = [];
+				console.log(this.list[this.indexOfSelected]);
 			},
 			//分页功能
 			handleSizeChange(val) {

@@ -44,7 +44,7 @@
 		  <div class="block">		   
 		     <el-pagination
 		       
-		       :current-page.sync="currentPage1"
+		       :current-page.sync="currentPage"
 		       :page-size="100"
 		       layout="total, prev, pager, next"
 		       :total="1000">
@@ -76,11 +76,11 @@
 	    data() {
 	      return {
 	        tableData: [],
-	        currentPage1: 1,
+	        currentPage: 1,
 	      }
 	    },
 	    created(){
-	    	this.$http.get(api.getOrderData).then(response => {
+	    	this.$http.get(api.getOrderData,{params:{currentPage:1}}).then(response => {
 				// get body data
 					console.log(response);
 					console.log(response.data.tableData);

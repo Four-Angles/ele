@@ -12,6 +12,20 @@ import VCharts from 'v-charts'
 Vue.use(VCharts)
 //ycAudrey 2017-8-4  ---end
 
+//ycAudrey 2017-8-10  ---start
+router.beforeEach((to, from, next) => {
+  if(to.path!='/login'){
+  	if (sessionStorage.getItem("username")) {
+  		next();
+  	}else{
+  		next("/login");
+  	}
+  }else{
+  	next();
+  }
+})
+//ycAudrey 2017-8-10  ---end
+
 Vue.use(ElementUI)
 Vue.use(VueResource)
 

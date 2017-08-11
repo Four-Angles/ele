@@ -7,8 +7,9 @@
 		  	<router-link v-if='item.redirect==="noredirect"||index==navList.length-1' to="" class="no-redirect">{{item.name}}</router-link>
 			<router-link v-else :to="item.path">{{item.name}}</router-link>
 		  </el-breadcrumb-item>
-		  
+		 
 		</el-breadcrumb>
+		 <el-button type="warning" @click="out">退出系统</el-button>
  	</div>
 </template>
 <script>
@@ -33,6 +34,10 @@
 			  }
 			  console.log('面包屑:',matched);
 			  this.navList = matched;
+			},
+			out(){
+				sessionStorage.setItem("username","");
+				this.$router.push("/");
 			}
 		},
 
@@ -60,5 +65,10 @@
 	padding-top: 15px;
 	box-sizing: border-box;
     background-color:#eff2f7;
+}
+#breadNav .el-button{
+	position: fixed;
+	top: 10px;
+	right: 10px;
 }
 </style>

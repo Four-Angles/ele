@@ -21,6 +21,7 @@
 	</div>
 </template>
 <script>
+	
 	var today = new Date();
 	var today2 = today;
 	var year = today.getFullYear();

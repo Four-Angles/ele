@@ -9,7 +9,7 @@
             <el-form-item  prop="checkPass">
 		    <el-input type="password" prop="checkPass" v-model="ruleForm2.checkPass" placeholder="密码" auto-complete="off"></el-input>
 		    </el-form-item>
-		    <el-button type="primary" @click="submitForm('ruleForm2')" :loading="loading">登录</el-button>
+		    <el-button type="primary" @click="submitForm('ruleForm2')" >登录</el-button>
 
 		    <!-- <el-button @click="resetForm('ruleForm2')">重置</el-button> -->
 

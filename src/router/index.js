@@ -41,11 +41,9 @@ export default new Router({
             { path: 'addshops',name:'增加商铺',component:Addshops},
             { path: 'addfoods',name:'增加商品',component:Addfoods},]
           },
-
           
-
           //添加个人信息菜单 
-          { path: 'personalInfo', component:Person }   
+          { path: 'personalInfo',name:'个人信息', component:Person }   
           
       ]
     },

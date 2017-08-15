@@ -316,6 +316,7 @@
 		        }).then(() => {
 		 
 		    	  vm.foodlistdata[vm.indexOfselect] = vm.foodform;
+		    	  vm.foodlistdata.splice(vm.indexOfselect,1,vm.foodform)
 		    	  vm.dialogTableVisible_edit = false;
 
 		          this.$message({

@@ -163,6 +163,7 @@
 	 	       	loading:false,
 	 	       	indexOfSelected:0,
 	 	       	myForm:{},
+	 	       	labelWidth:100,
 	 	       	myCategory:[],
 	 	       	myForm:{},
 	 	       	longitude:139.6917064,//默认经度
@@ -363,6 +364,7 @@
 			//myForm表单确定按钮
 			confirm:function(){
 				this.list[this.indexOfSelected] = JSON.parse(JSON.stringify(this.myForm));
+				this.list.splice(this.indexOfSelected,1,this.myForm);
 				this.categoryToListCategory(this.indexOfSelected);
 				this.dialogFormVisible = false;
 				console.log(this.list[this.indexOfSelected]);

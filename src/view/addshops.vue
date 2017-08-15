@@ -13,7 +13,7 @@
 		      @select="handleSelect"
 		    >  	
 		    </el-autocomplete><br>
-		    <span>当前城市：广州</span>			
+		    <span>当前城市：上海</span>			
 		  </el-form-item>
 		  <el-form-item label="联系电话" prop="phone">
 		    <el-input v-model="ruleForm.phone"></el-input>

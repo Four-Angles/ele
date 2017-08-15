@@ -179,11 +179,11 @@
 	        	 rows.splice(index, 1);
 	       	},
       		show:function(){
-      				this.$message({
-      					showClose: true,
-      					message: '必须上传食品图片',
-      					 type: 'error'
-      					  });
+      				// this.$message({
+      				// 	showClose: true,
+      				// 	message: '必须上传食品图片',
+      				// 	 type: 'error'
+      				// 	  });
       				console.log("添加食品信息：",this.ruleForm);
       				return false;
     			     					

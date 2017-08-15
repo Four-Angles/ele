@@ -71,7 +71,7 @@ export default {
 	          	if (valid) {
 	          		this.loading = true;
 	          		sessionStorage.setItem("username",this.ruleForm2.checkUser);
-		            this.$router.push('/manager/index');
+		            this.$router.push('/manager');
 		        } else {
 		            console.log('error submit!!');
 		            return false;

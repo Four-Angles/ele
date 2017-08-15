@@ -24,23 +24,20 @@ export default new Router({
     {
       path: '/login',name: '',component:Login
     },
+
     {
-      path: '/manager/index',name: '饿了么后台管理系统',component:manager,
+      path: '/manager',component:manager,
       children:[
-          { path: '',name:'首页',component:Index,meta:{keep_alive: true}},
-          { path: '',name: '数据管理',component:manager,
-            children:[
-            { path: 'users',name: '用户列表',component:Users},
-            { path: 'managers',name: '管理员列表',component:Managers},
-            { path: 'sellers',name:'商家列表',component:Sellers,meta:{keep_alive: true}},
-            { path: 'foodlist',name:'食品列表',component:Foodlist},
-            { path: 'orders',name:'订单列表',component:Orders},]
-          },
-          { path: '',name: '添加数据',component:manager,
-            children:[
-            { path: 'addshops',name:'增加商铺',component:Addshops},
-            { path: 'addfoods',name:'增加商品',component:Addfoods},]
-          },
+      	  
+          { path: '/',name:'首页',component:Index,meta:{keep_alive: true}},
+          { path: 'users',name: '用户列表',component:Users},
+          { path: 'managers',name: '管理员列表',component:Managers},
+          { path: 'sellers',name:'商家列表',component:Sellers,meta:{keep_alive: true}},
+          { path: 'foodlist',name:'食品列表',component:Foodlist},
+          { path: 'orders',name:'订单列表',component:Orders},            
+          { path: 'addshops',name:'添加商铺',component:Addshops},
+          { path: 'addfoods',name:'添加商品',component:Addfoods},
+          
           
           //添加个人信息菜单 
           { path: 'personalInfo',name:'个人信息', component:Person }   

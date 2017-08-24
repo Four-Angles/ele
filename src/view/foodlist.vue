@@ -115,7 +115,8 @@
 		</el-dialog>
 	</div>
 </template>
-<script>
+<script>	
+	import {api} from '../global/api';
 	export default{
 		name:'foodlist',
 		data() {
@@ -200,29 +201,14 @@
 
 		    //读取数据
 		    getData(){
-		    	this.$http.get('../../static/data/data-foodlist.json').then(response => {
+		    	this.$http.get(api.getFoodlist).then(response => {
 
 		    		var data = response.data.data;
 		    		console.log(data);
 
 		    		this.foodlistdata = data;
 
-					/*if(data){ 
-						//console.log(data.subjects);
-	                    this.foodlistdata = data;
-	              
-	                    this.listQuery.currPage = 1;
-	                    this.listQuery.pageSize = 10;
-	                    this.total = data.length;
-	                    
-	               }/*else{
-	                    //alert(res.body.resultMsg)
-	                    Message({
-	                        showClose: true,
-	                        message: response.body.resultMsg,
-	                        type: 'error'
-	                    });
-	               }*/
+				
 				}, response => {
 				    // error callback
 				    alert("加载data-foodlist.json文件失败");
